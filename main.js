@@ -98,6 +98,12 @@
     window.addEventListener("pagehide", function () { window.clearInterval(typeTimer); });
   }
 
+  /* ---------------- icon marquee: duplicate the track for a seamless loop ---------------- */
+  var marqueeTrack = document.getElementById("marquee-track");
+  if (marqueeTrack) {
+    marqueeTrack.innerHTML += marqueeTrack.innerHTML;
+  }
+
   /* ---------------- footer subscribe ---------------- */
   var subscribe = document.getElementById("subscribe");
   if (subscribe) {

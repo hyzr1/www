@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -102,6 +102,31 @@
       </div>
     </section>
 
+    <!-- ============================== STACK BAND ============================== -->
+    <section class="stack-band reveal">
+      <p class="stack-caption">Pairs with the tools you already use — and all of it answers to your voice.</p>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track" id="marquee-track">
+          <span class="tile"><img src="assets/icons/vscode.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/claude.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/openai-mark.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/github.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/git.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/typescript.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/react.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/python.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/nodedotjs.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/docker.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/supabase.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/vercel.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/figma.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/rust.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/go.svg" alt="" /></span>
+          <span class="tile"><img src="assets/icons/stripe.svg" alt="" /></span>
+        </div>
+      </div>
+    </section>
+
     <!-- ============================== DEMO ============================== -->
     <section class="demo reveal" id="demo">
       <div class="section-head">
@@ -155,8 +180,9 @@
         <span class="kicker">Two ways to run</span>
         <h2>Start like a search engine.<br />Scale to your whole environment.</h2>
       </div>
-      <div class="ways-grid">
-        <div class="way-card">
+      <!-- Row 1 — Ask -->
+      <div class="way-row">
+        <div class="way-copy">
           <div class="way-head">
             <span class="way-icon"><svg viewBox="0 0 24 24" class="i" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>
             <h3>Ask</h3>
@@ -167,32 +193,61 @@
           <ul class="way-list">
             <li>Ask anything, instantly — nothing to install</li>
             <li>Automatic model choice, or pick one yourself</li>
+            <li>Voice built in — dictate prompts and steer work hands-free</li>
             <li>Conversations sync across your devices</li>
           </ul>
         </div>
-        <div class="way-card featured">
+        <div class="way-visual">
+          <div class="ask-card">
+            <div class="ac-msg user">Why is my Postgres query slow only in production?</div>
+            <div class="ac-route"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1"/></svg> Routed to a reasoning model</div>
+            <div class="ac-msg assistant">Most likely a plan flip: production has different table statistics, so the
+              planner switched to a sequential scan. Run <code>EXPLAIN ANALYZE</code> on both and compare row
+              estimates — here's how to read it…</div>
+            <div class="ac-composer">
+              <span>Ask a follow-up — or just say it</span>
+              <span class="ac-mic"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 — Pair -->
+      <div class="way-row flip" id="pair-row">
+        <div class="way-copy">
           <div class="way-head">
             <span class="way-icon"><svg viewBox="0 0 24 24" class="i" width="18" height="18"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
             <h3>Pair</h3>
             <span class="way-tag accent">Full power</span>
           </div>
-          <p>Download the app and pair your local environment — or bring your own API keys. Every project gets an
-            isolated filesystem and a GitHub repo, and you can drive it all from your phone.</p>
+          <p>Download the app and pair Claude, Codex, and your local environment — tailored to you. Or bring your own
+            API keys. Then build full projects from your phone, your browser, anywhere.</p>
           <ul class="way-list">
-            <li>Uses your authenticated Claude and Codex CLI sessions</li>
-            <li>Or connect directly with your own API keys</li>
-            <li>Own filesystem, Git branches, and browser preview per project</li>
-            <li>Start work from your phone; it keeps running when the screen sleeps</li>
+            <li>Pairs your authenticated Claude and Codex sessions in one tap</li>
+            <li>Every project gets its own isolated environment, filesystem, and GitHub repo</li>
+            <li>Code in the browser with live preview — no local setup after pairing</li>
+            <li>Start and steer work from your phone, by touch or by voice</li>
           </ul>
-          <div class="pair-visual">
-            <div class="pair-terminal">
-              <div class="pt-bar"><i></i><i></i><i></i><span>hyzr — pair</span></div>
-              <pre><span class="pt-prompt">$</span> hyzr pair
-<span class="pt-dim">Scanning local environment…</span>
-<span class="pt-ok">✓</span> claude CLI <span class="pt-dim">authenticated</span>
-<span class="pt-ok">✓</span> codex CLI <span class="pt-dim">authenticated</span>
-<span class="pt-ok">✓</span> git · node 24
-Pairing code  <b class="pt-code">7F4-K2Q</b></pre>
+        </div>
+        <div class="way-visual">
+          <div class="pair-stack">
+            <div class="pair-card">
+              <div class="pc-head">
+                <span class="hyzr-mark" style="--mark-size:22px">H</span>
+                <div class="pc-title"><b>Pair this device</b><span>hyzr.ai/pair</span></div>
+                <span class="pc-live"><i></i> Waiting</span>
+              </div>
+              <div class="pc-code" aria-label="Pairing code 742913">
+                <b>7</b><b>4</b><b>2</b><b class="gap">9</b><b>1</b><b>3</b>
+              </div>
+              <p class="pc-hint">Enter this code in the Hyzr app on your phone</p>
+              <div class="pc-env">
+                <div class="pc-row"><img src="assets/icons/claude.svg" alt="" /><b>Claude</b><em>session authenticated</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
+                <div class="pc-row"><img src="assets/icons/openai-mark.svg" alt="" /><b>Codex</b><em>session authenticated</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
+                <div class="pc-row"><img src="assets/icons/vscode.svg" alt="" /><b>Local environment</b><em>git · node 24 · VS Code</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
+                <div class="pc-row"><img src="assets/icons/github.svg" alt="" /><b>GitHub</b><em>a repo for every project</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
+              </div>
+              <div class="pc-note">Each project runs in its own isolated environment</div>
             </div>
             <div class="pair-phone">
               <div class="pp-notch"></div>
@@ -202,7 +257,7 @@ Pairing code  <b class="pt-code">7F4-K2Q</b></pre>
               </div>
               <div class="pp-task">
                 <div class="pp-task-top"><span class="spinner"></span> Running <em>12m</em></div>
-                <div class="pp-progress"><span id="pp-bar"></span></div>
+                <div class="pp-progress"><span></span></div>
                 <div class="pp-meta">4/6 steps · 2 models · verified twice</div>
               </div>
               <div class="pp-step"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2"/></svg> Type checks passed</div>
@@ -223,14 +278,26 @@ Pairing code  <b class="pt-code">7F4-K2Q</b></pre>
             <span class="code-word">Hyzr <em>Code</em></span>
           </span>
           <h2 class="serif">Learn to code from zero.<br />Watch it. Hear it. Run it.</h2>
-          <p>Narrated, animated lectures explain one idea at a time while the code lights up in sync. Then you write and
-            run real JavaScript and Python — right in the browser, even offline.</p>
+          <p>Custom-made animated videos — voiced narration, interactive highlighting, and code that lights up in
+            sync — explain one idea at a time so you actually watch to the end. Then you write and run real JavaScript
+            and Python in the browser, even offline.</p>
+          <div class="code-roles">
+            <span class="code-roles-label">Tailored to where you're headed</span>
+            <span class="role-chip">Software engineering</span>
+            <span class="role-chip">Machine learning</span>
+            <span class="role-chip">Quant</span>
+            <span class="role-chip">FAANG interviews</span>
+          </div>
           <ul class="code-points">
-            <li><b>Animated video lectures</b> — synchronized narration with timed code cues</li>
+            <li><b>Custom animated lectures</b> — generated video, voice, and interactive code cues, not slideware</li>
             <li><b>Run everything in the browser</b> — a sandboxed JS harness and Python via Pyodide</li>
-            <li><b>Remember what you learn</b> — retrieval checks and spaced scheduling</li>
-            <li><b>Interview-ready</b> — algorithm drills from fundamentals to FAANG-style prep</li>
+            <li><b>Remember what you learn</b> — retrieval checks, confidence calibration, spaced scheduling</li>
+            <li><b>Role-specific prep</b> — drills and tracks tuned to SWE, ML, quant, and FAANG-style interviews</li>
           </ul>
+          <blockquote class="code-why">
+            AI made shipping easy — and made fundamentals fade. Even a decade in, vibe coding quietly erodes what
+            interviews still test. Hyzr Code rebuilds real fluency from zero, or refreshes what you've let slip.
+          </blockquote>
           <a class="code-cta" href="https://code.hyzr.ai">Start learning
             <svg viewBox="0 0 24 24" class="i" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
@@ -292,7 +359,7 @@ Pairing code  <b class="pt-code">7F4-K2Q</b></pre>
       <div class="footer-brand">
         <div class="fb-mark">
           <span class="hyzr-mark inverse" style="--mark-size:26px">H</span>
-          <span class="fb-name">Hyzr</span>
+          <span class="fb-name">HyzrAI</span>
         </div>
         <p class="fb-tag serif">A studio of software &amp; intelligence.<br />Built by one, sharpened in public.</p>
         <form class="fb-subscribe" id="subscribe">
@@ -323,9 +390,9 @@ Pairing code  <b class="pt-code">7F4-K2Q</b></pre>
         <a href="mailto:hyzrai@gmail.com">hyzrai@gmail.com</a>
       </div>
     </div>
-    <div class="footer-giant" aria-hidden="true">Hyzr</div>
+    <div class="footer-giant" aria-hidden="true">HyzrAI</div>
     <div class="footer-base">
-      <span>© 2026 Hyzr. Software &amp; intelligence, built by one.</span>
+      <span>© 2026 HyzrAI. Software &amp; intelligence, built by one.</span>
       <span class="fb-status"><i></i> All systems operational</span>
     </div>
   </footer>
