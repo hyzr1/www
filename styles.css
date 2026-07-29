@@ -1499,28 +1499,32 @@ section { scroll-margin-top: 70px; }
 .foot-wordmark {
   display: flex;
   justify-content: center;
-  margin: 76px 0 0;
+  margin: 56px 0 -0.13em;
+  font-size: clamp(92px, 22.5vw, 368px);
   user-select: none;
   pointer-events: none;
   white-space: nowrap;
 }
 .fw-mask { display: inline-block; overflow: hidden; }
 .fw-char {
-  display: inline-block;
-  font-size: clamp(90px, 19.5vw, 335px);
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1.04;
+  display: block;
+  font-family: "Inter Tight", var(--font-sans);
+  font-size: 1em;
+  font-weight: 550;
+  letter-spacing: -0.045em;
+  line-height: 1.16;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.17);
 }
 .foot-bottom {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  margin: 64px -24px 0;
+  margin: 0 -24px;
   padding: 24px 24px 28px;
   border-top: 1px solid var(--fborder);
   color: var(--ffaint);
