@@ -98,56 +98,45 @@
     window.addEventListener("pagehide", function () { window.clearInterval(typeTimer); });
   }
 
-  /* ---------------- route band: tools in, verified software out (GSAP) ---------------- */
-  var routeStage = document.getElementById("route-stage");
+  /* ---------------- icon ribbon: slides along its diagonal, scrubbed to scroll ---------------- */
   var hasGsap = typeof window.gsap !== "undefined";
-  if (routeStage && hasGsap && !reducedMotion && typeof window.MotionPathPlugin !== "undefined") {
-    window.gsap.registerPlugin(window.MotionPathPlugin);
-    var routeSvg = document.getElementById("route-lines");
-    var routeLines = Array.prototype.slice.call(routeStage.querySelectorAll(".rl"));
-    var routeRing = routeStage.querySelector(".route-ring");
+  var hasST = typeof window.ScrollTrigger !== "undefined";
+  if (hasGsap && hasST) window.gsap.registerPlugin(window.ScrollTrigger);
 
-    var startPulses = function () {
-      routeLines.forEach(function (path, i) {
-        var isOut = path.classList.contains("out");
-        var pulse = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        pulse.setAttribute("r", "3.4");
-        pulse.setAttribute("class", "rl-pulse" + (isOut ? " out" : ""));
-        routeSvg.appendChild(pulse);
-        var duration = 2.1 + (i % 3) * 0.55;
-        var tl = window.gsap.timeline({ repeat: -1, delay: i * 0.5, repeatDelay: 0.9 });
-        tl.to(pulse, { motionPath: { path: "#" + path.id, align: "#" + path.id, alignOrigin: [0.5, 0.5] }, duration: duration, ease: "power1.inOut" }, 0)
-          .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.35 }, 0)
-          .to(pulse, { opacity: 0, duration: 0.35 }, duration - 0.35);
-      });
-      window.gsap.fromTo(routeRing,
-        { opacity: 0.8, scale: 1 },
-        { opacity: 0, scale: 1.45, duration: 1.3, ease: "power2.out", repeat: -1, repeatDelay: 1.5 });
-    };
-
-    var routeStarted = false;
-    var routeObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !routeStarted) {
-          routeStarted = true;
-          var remaining = routeLines.length;
-          routeLines.forEach(function (path, i) {
-            var length = path.getTotalLength();
-            path.style.strokeDasharray = length;
-            path.style.strokeDashoffset = length;
-            window.gsap.to(path, {
-              strokeDashoffset: 0,
-              duration: 1.1,
-              delay: i * 0.09,
-              ease: "power2.out",
-              onComplete: function () { if (--remaining === 0) startPulses(); }
-            });
-          });
-          routeObserver.unobserve(routeStage);
+  var ribbonTrack = document.getElementById("ribbon-track");
+  if (ribbonTrack && hasGsap && hasST && !reducedMotion) {
+    window.gsap.fromTo(ribbonTrack,
+      { x: 80 },
+      {
+        x: -960,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".ribbon-band",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.6
         }
       });
-    }, { threshold: 0.3 });
-    routeObserver.observe(routeStage);
+  }
+
+  /* ---------------- two ways: sticky index synced to the scrolling panels ---------------- */
+  var waysPanels = Array.prototype.slice.call(document.querySelectorAll(".ways-panel"));
+  var waysIndexItems = Array.prototype.slice.call(document.querySelectorAll(".wi"));
+  if (waysPanels.length && waysIndexItems.length && hasGsap && hasST) {
+    waysPanels.forEach(function (panel) {
+      window.ScrollTrigger.create({
+        trigger: panel,
+        start: "top center",
+        end: "bottom center",
+        onToggle: function (self) {
+          if (!self.isActive) return;
+          var index = panel.getAttribute("data-index");
+          waysIndexItems.forEach(function (item) {
+            item.classList.toggle("active", item.getAttribute("data-panel") === index);
+          });
+        }
+      });
+    });
   }
 
   /* ---------------- footer wordmark reveal — same params as the studio site ---------------- */
@@ -267,8 +256,9 @@
       tl.call(function () { setStatusDone(subStatuses[2]); apTasks.textContent = "3/3"; }, [], 11.2);
 
       reveal(".afx-answer", 12.1);
-      tl.call(function () { runBadge.hidden = true; }, [], 12.4);
-      tl.to({}, { duration: 6 }, 12.5);
+      reveal(".afx-related", 13.0);
+      tl.call(function () { runBadge.hidden = true; }, [], 13.2);
+      tl.to({}, { duration: 6 }, 13.3);
 
       var demoStarted = false;
       var demoObserver = new IntersectionObserver(function (entries) {

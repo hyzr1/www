@@ -99,46 +99,41 @@
       </div>
     </section>
 
-    <!-- ============================== ROUTE BAND ==============================
-         Tools in, verified software out. Lines carry pulses into the hub
-         (teal) and out to delivered results (green). -->
-    <section class="route-band reveal">
-      <p class="stack-caption">Your tools flow in. Verified software flows out.</p>
-      <div class="route-stage" id="route-stage">
-        <svg class="route-lines" id="route-lines" viewBox="0 0 1100 400" preserveAspectRatio="none" aria-hidden="true">
-          <path class="rl" id="rl-in-1" d="M 92 70 C 280 70, 390 178, 500 195" />
-          <path class="rl" id="rl-in-2" d="M 92 200 C 250 200, 370 200, 500 200" />
-          <path class="rl" id="rl-in-3" d="M 92 330 C 280 330, 390 222, 500 205" />
-          <path class="rl" id="rl-in-4" d="M 222 135 C 340 142, 430 184, 500 197" />
-          <path class="rl" id="rl-in-5" d="M 222 265 C 340 258, 430 216, 500 203" />
-          <path class="rl out" id="rl-out-1" d="M 600 194 C 690 182, 730 90, 822 90" />
-          <path class="rl out" id="rl-out-2" d="M 600 200 C 680 200, 730 200, 822 200" />
-          <path class="rl out" id="rl-out-3" d="M 600 206 C 690 218, 730 310, 822 310" />
-        </svg>
-
-        <div class="rt-tile" style="--x: 92; --y: 70; --d: 0s"><span class="tile"><img src="assets/icons/claude.svg" alt="Claude" /></span></div>
-        <div class="rt-tile" style="--x: 92; --y: 200; --d: -1.3s"><span class="tile"><img src="assets/icons/openai-mark.svg" alt="Codex" /></span></div>
-        <div class="rt-tile" style="--x: 92; --y: 330; --d: -2.6s"><span class="tile"><img src="assets/icons/git.svg" alt="Git" /></span></div>
-        <div class="rt-tile" style="--x: 222; --y: 135; --d: -1.9s"><span class="tile"><img src="assets/icons/github.svg" alt="GitHub" /></span></div>
-        <div class="rt-tile" style="--x: 222; --y: 265; --d: -0.6s"><span class="tile"><img src="assets/icons/vscode.svg" alt="VS Code" /></span></div>
-
-        <div class="route-hub" id="route-hub">
-          <span class="route-ring"></span>
-          <span class="route-hub-h">H</span>
-          <span class="route-hub-label">Routes by capability</span>
-        </div>
-
-        <div class="rt-out" style="--x: 940; --y: 90">
-          <span class="rt-check"><svg viewBox="0 0 24 24" class="i" width="11" height="11"><path d="M20 6 9 17l-5-5" style="--sw:2.4"/></svg></span>
-          <div><b>PR #142 opened</b><em>All checks passed</em></div>
-        </div>
-        <div class="rt-out" style="--x: 940; --y: 200">
-          <span class="rt-check"><svg viewBox="0 0 24 24" class="i" width="11" height="11"><path d="M20 6 9 17l-5-5" style="--sw:2.4"/></svg></span>
-          <div><b>Preview deployed</b><em>Desktop &amp; mobile verified</em></div>
-        </div>
-        <div class="rt-out" style="--x: 940; --y: 310">
-          <span class="rt-check"><svg viewBox="0 0 24 24" class="i" width="11" height="11"><path d="M20 6 9 17l-5-5" style="--sw:2.4"/></svg></span>
-          <div><b>14 tests green</b><em>Evidence saved to Proof</em></div>
+    <!-- ============================== ICON RIBBON ==============================
+         A slanted ribbon of the tools Hyzr pairs with. It slides along its
+         own diagonal, scrubbed to scroll. -->
+    <section class="ribbon-band" id="ribbon">
+      <p class="stack-caption">Pairs with Claude, Codex, GitHub, VS Code — your whole toolchain.</p>
+      <div class="ribbon-tilt" aria-hidden="true">
+        <div class="ribbon-track" id="ribbon-track">
+          <span class="rb" style="--r: -6deg; --ty: 26px"><img src="assets/icons/claude.svg" alt="" /></span>
+          <span class="rb sm" style="--r: 4deg; --ty: 8px"><img src="assets/icons/typescript.svg" alt="" /></span>
+          <span class="rb" style="--r: 3deg; --ty: -12px"><img src="assets/icons/github.svg" alt="" /></span>
+          <span class="rb sm" style="--r: -5deg; --ty: 18px"><img src="assets/icons/python.svg" alt="" /></span>
+          <span class="rb lg" style="--r: 5deg; --ty: -4px"><img src="assets/icons/vscode.svg" alt="" /></span>
+          <span class="rb sm" style="--r: -3deg; --ty: -20px"><img src="assets/icons/react.svg" alt="" /></span>
+          <span class="rb" style="--r: -4deg; --ty: 14px"><img src="assets/icons/openai-mark.svg" alt="" /></span>
+          <span class="rb sm" style="--r: 6deg; --ty: -8px"><img src="assets/icons/nodedotjs.svg" alt="" /></span>
+          <span class="rb" style="--r: 2deg; --ty: 22px"><img src="assets/icons/git.svg" alt="" /></span>
+          <span class="rb sm" style="--r: -6deg; --ty: 2px"><img src="assets/icons/docker.svg" alt="" /></span>
+          <span class="rb lg" style="--r: -3deg; --ty: -16px"><img src="assets/icons/claude.svg" alt="" /></span>
+          <span class="rb sm" style="--r: 5deg; --ty: 24px"><img src="assets/icons/supabase.svg" alt="" /></span>
+          <span class="rb" style="--r: 4deg; --ty: -6px"><img src="assets/icons/vscode.svg" alt="" /></span>
+          <span class="rb sm" style="--r: -4deg; --ty: 12px"><img src="assets/icons/figma.svg" alt="" /></span>
+          <span class="rb" style="--r: -5deg; --ty: -22px"><img src="assets/icons/openai-mark.svg" alt="" /></span>
+          <span class="rb sm" style="--r: 3deg; --ty: 16px"><img src="assets/icons/rust.svg" alt="" /></span>
+          <span class="rb" style="--r: 6deg; --ty: 0px"><img src="assets/icons/github.svg" alt="" /></span>
+          <span class="rb sm" style="--r: -2deg; --ty: -14px"><img src="assets/icons/go.svg" alt="" /></span>
+          <span class="rb" style="--r: -6deg; --ty: 20px"><img src="assets/icons/typescript.svg" alt="" /></span>
+          <span class="rb sm" style="--r: 4deg; --ty: -10px"><img src="assets/icons/vercel.svg" alt="" /></span>
+          <span class="rb lg" style="--r: 3deg; --ty: 10px"><img src="assets/icons/git.svg" alt="" /></span>
+          <span class="rb sm" style="--r: -5deg; --ty: -18px"><img src="assets/icons/python.svg" alt="" /></span>
+          <span class="rb" style="--r: 5deg; --ty: 6px"><img src="assets/icons/claude.svg" alt="" /></span>
+          <span class="rb sm" style="--r: -3deg; --ty: 22px"><img src="assets/icons/react.svg" alt="" /></span>
+          <span class="rb" style="--r: -4deg; --ty: -8px"><img src="assets/icons/vscode.svg" alt="" /></span>
+          <span class="rb sm" style="--r: 6deg; --ty: 14px"><img src="assets/icons/nodedotjs.svg" alt="" /></span>
+          <span class="rb" style="--r: 2deg; --ty: -18px"><img src="assets/icons/openai-mark.svg" alt="" /></span>
+          <span class="rb sm" style="--r: -6deg; --ty: 4px"><img src="assets/icons/docker.svg" alt="" /></span>
         </div>
       </div>
     </section>
@@ -177,6 +172,9 @@
             <div class="af-hist-item">Fix flaky checkout tests</div>
             <div class="af-hist-item">Push my changes to a PR</div>
             <div class="af-hist-item">Realtime chat architecture</div>
+          </div>
+          <div class="af-side-bottom">
+            <span class="af-avatar">K</span> Settings
           </div>
         </aside>
         <div class="af-main">
@@ -263,6 +261,13 @@
                 <span><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/></svg> Regenerate</span>
               </div>
             </div>
+
+            <div class="afx afx-related ds">
+              <span class="ar-label">Related</span>
+              <div class="ar-item"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M12 5v14M5 12h14"/></svg> What changed?</div>
+              <div class="ar-item"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M12 5v14M5 12h14"/></svg> Show me the verification evidence</div>
+              <div class="ar-item"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M12 5v14M5 12h14"/></svg> What would you improve next?</div>
+            </div>
           </div>
           <div class="af-composer">
             <span class="afc-placeholder">Ask anything — Hyzr Chat routes it to the right model</span>
@@ -280,94 +285,107 @@
       <p class="demo-caption">A scripted replay of a real Hyzr Chat run — plan, route, build, verify.</p>
     </section>
 
-    <!-- ============================== TWO WAYS ============================== -->
-    <section class="ways reveal" id="pair">
-      <div class="section-head">
-        <span class="kicker">Two ways to run</span>
-        <h2>Start like a search engine.<br />Scale to your whole environment.</h2>
-      </div>
-      <!-- Row 1 — Ask -->
-      <div class="way-row">
-        <div class="way-copy">
-          <div class="way-head">
-            <span class="way-icon"><svg viewBox="0 0 24 24" class="i" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>
-            <h3>Ask</h3>
-            <span class="way-tag">No setup</span>
-          </div>
-          <p>Open <a href="https://chat.hyzr.ai">chat.hyzr.ai</a> and ask. Fast answers, deep research, and planning —
-            with every request routed to the model that fits it best.</p>
-          <ul class="way-list">
-            <li>Ask anything, instantly — nothing to install</li>
-            <li>Automatic model choice, or pick one yourself</li>
-            <li>Voice built in — dictate prompts and steer work hands-free</li>
-            <li>Conversations sync across your devices</li>
-          </ul>
-        </div>
-        <div class="way-visual">
-          <div class="ask-card">
-            <div class="ac-msg user">Why is my Postgres query slow only in production?</div>
-            <div class="ac-route"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1"/></svg> Routed to a reasoning model</div>
-            <div class="ac-msg assistant">Most likely a plan flip: production has different table statistics, so the
-              planner switched to a sequential scan. Run <code>EXPLAIN ANALYZE</code> on both and compare row
-              estimates — here's how to read it…</div>
-            <div class="ac-composer">
-              <span>Ask a follow-up — or just say it</span>
-              <span class="ac-mic"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+    <!-- ============================== TWO WAYS ==============================
+         Sticky-parallax: the left heading pins while the right panels
+         scroll past; the index tracks the active panel. -->
+    <section class="ways" id="pair">
+      <div class="ways-grid2">
+        <div class="ways-left">
+          <span class="kicker">Two ways to run</span>
+          <h2>Start like a search engine.<br />Scale to your whole environment.</h2>
+          <div class="ways-index" id="ways-index">
+            <div class="wi active" data-panel="0">
+              <i>01</i>
+              <div><b>Ask</b><span>Instant answers, no setup, routed to the right model</span></div>
+            </div>
+            <div class="wi" data-panel="1">
+              <i>02</i>
+              <div><b>Pair</b><span>Claude, Codex, and your environment — from your phone</span></div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Row 2 — Pair -->
-      <div class="way-row flip" id="pair-row">
-        <div class="way-copy">
-          <div class="way-head">
-            <span class="way-icon"><svg viewBox="0 0 24 24" class="i" width="18" height="18"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
-            <h3>Pair</h3>
-            <span class="way-tag accent">Full power</span>
-          </div>
-          <p>Download the app and pair Claude, Codex, and your local environment — tailored to you. Or bring your own
-            API keys. Then build full projects from your phone, your browser, anywhere.</p>
-          <ul class="way-list">
-            <li>Pairs your authenticated Claude and Codex sessions in one tap</li>
-            <li>Every project gets its own isolated environment, filesystem, and GitHub repo</li>
-            <li>Code in the browser with live preview — no local setup after pairing</li>
-            <li>Start and steer work from your phone, by touch or by voice</li>
-          </ul>
-        </div>
-        <div class="way-visual">
-          <div class="pair-stack">
-            <div class="pair-card">
-              <div class="pc-head">
-                <div class="pc-title"><b>Pair this device</b><span>hyzr.ai/pair</span></div>
-                <span class="pc-live"><i></i> Waiting</span>
+        <div class="ways-right" id="ways-right">
+          <!-- Panel 1 — Ask -->
+          <div class="ways-panel" data-index="0">
+            <div class="way-copy">
+              <div class="way-head">
+                <span class="way-icon"><svg viewBox="0 0 24 24" class="i" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>
+                <h3>Ask</h3>
+                <span class="way-tag">No setup</span>
               </div>
-              <div class="pc-code" aria-label="Pairing code 742913">
-                <b>7</b><b>4</b><b>2</b><b class="gap">9</b><b>1</b><b>3</b>
-              </div>
-              <p class="pc-hint">Enter this code in the Hyzr app on your phone</p>
-              <div class="pc-env">
-                <div class="pc-row"><img src="assets/icons/claude.svg" alt="" /><b>Claude</b><em>session authenticated</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
-                <div class="pc-row"><img src="assets/icons/openai-mark.svg" alt="" /><b>Codex</b><em>session authenticated</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
-                <div class="pc-row"><img src="assets/icons/vscode.svg" alt="" /><b>Local environment</b><em>git · node 24 · VS Code</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
-                <div class="pc-row"><img src="assets/icons/github.svg" alt="" /><b>GitHub</b><em>a repo for every project</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
-              </div>
-              <div class="pc-note">Each project runs in its own isolated environment</div>
+              <p>Open <a href="https://chat.hyzr.ai">chat.hyzr.ai</a> and ask. Fast answers, deep research, and
+                planning — with every request routed to the model that fits it best.</p>
+              <ul class="way-list">
+                <li>Ask anything, instantly — nothing to install</li>
+                <li>Automatic model choice, or pick one yourself</li>
+                <li>Voice built in — dictate prompts and steer work hands-free</li>
+                <li>Conversations sync across your devices</li>
+              </ul>
             </div>
-            <div class="pair-phone">
-              <div class="pp-notch"></div>
-              <div class="pp-head">
-                <span class="hyzr-mark" style="--mark-size:16px">H</span>
-                <span>Pricing page rebuild</span>
+            <div class="ask-card">
+              <div class="ac-msg user">Why is my Postgres query slow only in production?</div>
+              <div class="ac-route"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1"/></svg> Routed to a reasoning model</div>
+              <div class="ac-msg assistant">Most likely a plan flip: production has different table statistics, so the
+                planner switched to a sequential scan. Run <code>EXPLAIN ANALYZE</code> on both and compare row
+                estimates — here's how to read it…</div>
+              <div class="ac-composer">
+                <span>Ask a follow-up — or just say it</span>
+                <span class="ac-mic"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
               </div>
-              <div class="pp-task">
-                <div class="pp-task-top"><span class="spinner"></span> Running <em>12m</em></div>
-                <div class="pp-progress"><span></span></div>
-                <div class="pp-meta">4/6 steps · 2 models · verified twice</div>
+            </div>
+          </div>
+
+          <!-- Panel 2 — Pair -->
+          <div class="ways-panel" data-index="1">
+            <div class="way-copy">
+              <div class="way-head">
+                <span class="way-icon"><svg viewBox="0 0 24 24" class="i" width="18" height="18"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
+                <h3>Pair</h3>
+                <span class="way-tag accent">Full power</span>
               </div>
-              <div class="pp-step"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2"/></svg> Type checks passed</div>
-              <div class="pp-step"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2"/></svg> Mobile screenshot captured</div>
-              <div class="pp-step dim"><span class="spinner"></span> Verifying acceptance criteria…</div>
+              <p>Download the app and pair Claude, Codex, and your local environment — tailored to you. Or bring your
+                own API keys. Then build full projects from your phone, your browser, anywhere.</p>
+              <ul class="way-list">
+                <li>Pairs your authenticated Claude and Codex sessions in one tap</li>
+                <li>Every project gets its own isolated environment, filesystem, and GitHub repo</li>
+                <li>Code in the browser with live preview — no local setup after pairing</li>
+                <li>Start and steer work from your phone, by touch or by voice</li>
+              </ul>
+            </div>
+            <div class="pair-stack">
+              <div class="pair-card">
+                <div class="pc-head">
+                  <div class="pc-title"><b>Pair this device</b><span>hyzr.ai/pair</span></div>
+                  <span class="pc-live"><i></i> Waiting</span>
+                </div>
+                <div class="pc-code" aria-label="Pairing code 742913">
+                  <b>7</b><b>4</b><b>2</b><b class="gap">9</b><b>1</b><b>3</b>
+                </div>
+                <p class="pc-hint">Enter this code in the Hyzr app on your phone</p>
+                <div class="pc-env">
+                  <div class="pc-row"><img src="assets/icons/claude.svg" alt="" /><b>Claude</b><em>session authenticated</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
+                  <div class="pc-row"><img src="assets/icons/openai-mark.svg" alt="" /><b>Codex</b><em>session authenticated</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
+                  <div class="pc-row"><img src="assets/icons/vscode.svg" alt="" /><b>Local environment</b><em>git · node 24 · VS Code</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
+                  <div class="pc-row"><img src="assets/icons/github.svg" alt="" /><b>GitHub</b><em>a repo for every project</em><span class="pc-ok"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2.2"/></svg></span></div>
+                </div>
+                <div class="pc-note">Each project runs in its own isolated environment</div>
+              </div>
+              <div class="pair-phone">
+                <div class="pp-notch"></div>
+                <div class="pp-head">
+                  <span class="hyzr-mark" style="--mark-size:16px">H</span>
+                  <span>Pricing page rebuild</span>
+                </div>
+                <div class="pp-task">
+                  <div class="pp-task-top"><span class="spinner"></span> Running <em>12m</em></div>
+                  <div class="pp-progress"><span></span></div>
+                  <div class="pp-meta">4/6 steps · 2 models · verified twice</div>
+                </div>
+                <div class="pp-step"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2"/></svg> Type checks passed</div>
+                <div class="pp-step"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2"/></svg> Mobile screenshot captured</div>
+                <div class="pp-step dim"><span class="spinner"></span> Verifying acceptance criteria…</div>
+              </div>
             </div>
           </div>
         </div>
