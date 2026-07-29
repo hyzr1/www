@@ -79,7 +79,7 @@ a { color: inherit; }
   place-items: center;
   border-radius: 24%;
   background: var(--text);
-  color: #ffffff;
+  color: var(--bg);
   font-family: var(--font-read);
   font-size: calc(var(--mark-size) * 0.54);
   font-weight: 650;
@@ -110,9 +110,8 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   gap: 28px;
-  max-width: calc(var(--page-max) + 48px);
-  margin: 0 auto;
-  padding: 14px 24px;
+  width: 100%;
+  padding: 14px clamp(24px, 4vw, 48px);
   background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -120,7 +119,7 @@ a { color: inherit; }
 .nav::after {
   content: "";
   position: absolute;
-  inset: auto 24px 0;
+  inset: auto 0 0;
   height: 1px;
   background: var(--border);
   opacity: 0;
@@ -441,33 +440,60 @@ section { scroll-margin-top: 70px; }
   .hero-eyebrow .dot, .spinner { animation: none; }
 }
 
-/* ---------------------------------------------------------- stack band */
-.stack-band { padding: 74px 0 0; overflow: hidden; }
+/* ---------------------------------------------------------- route band
+   Core tools fly along curved paths into the Hyzr mark — capability
+   routing, drawn literally. GSAP MotionPath; static row as fallback. */
+.route-band { padding: 74px 0 0; overflow: hidden; }
 .stack-caption {
-  margin: 0 24px 26px;
+  margin: 0 24px 10px;
   color: var(--text-faint);
   font-size: 13px;
   text-align: center;
 }
-.marquee {
+.route-stage {
   position: relative;
-  width: 100%;
+  max-width: 1200px;
+  height: 320px;
+  margin: 0 auto;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
-.marquee-track {
-  display: flex;
-  gap: 22px;
-  width: max-content;
-  padding: 8px 0 16px;
-  animation: drift 44s linear infinite;
+.route-paths {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-@keyframes drift { to { transform: translateX(-50%); } }
+.route-paths path {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+}
+.route-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 22px;
+  background: var(--panel);
+  box-shadow: 0 20px 44px -20px rgba(20, 20, 18, 0.35);
+  z-index: 2;
+}
+.route-ring {
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--accent-border);
+  border-radius: 22px;
+  opacity: 0;
+}
 .tile {
-  width: 62px;
-  height: 62px;
+  width: 60px;
+  height: 60px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
@@ -475,19 +501,52 @@ section { scroll-margin-top: 70px; }
   border-radius: 16px;
   background: var(--panel);
   box-shadow: 0 10px 24px -14px rgba(20, 20, 18, 0.25);
-  animation: bob 3.6s ease-in-out infinite;
 }
-.tile:nth-child(2n) { animation-delay: -0.9s; }
-.tile:nth-child(3n) { animation-delay: -1.8s; }
-.tile:nth-child(5n) { animation-delay: -2.7s; }
-@keyframes bob { 50% { transform: translateY(-6px); } }
-.tile img { width: 30px; height: 30px; object-fit: contain; }
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track, .tile { animation: none; }
+.tile img { width: 29px; height: 29px; object-fit: contain; }
+.route-tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  z-index: 1;
 }
+.route-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 0 24px;
+}
+.route-fallback[hidden] { display: none; }
 
-/* ---------------------------------------------------------- demo: app frame */
-.demo { padding: 90px 24px 20px; }
+/* ---------------------------------------------------------- demo: app frame
+   This whole band runs in Hyzr Chat's dark theme — the product's actual
+   default — using the tokens from chat/app/globals.css verbatim. */
+.demo {
+  --bg: #0e0e10;
+  --sidebar: #161618;
+  --panel: #1c1c1f;
+  --panel-2: #232327;
+  --panel-hi: #2a2a2e;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --text: #f4f4f2;
+  --text-soft: #a6a6a4;
+  --text-faint: #6c6c6e;
+  --accent: #20b8cd;
+  --accent-ink: #6fe0ee;
+  --accent-soft: rgba(32, 184, 205, 0.14);
+  --accent-border: rgba(32, 184, 205, 0.4);
+  --ok: #43c98a;
+  margin-top: 84px;
+  padding: 96px 24px 88px;
+  background: var(--bg);
+  color: var(--text);
+}
+.demo .app-frame { box-shadow: 0 40px 90px -36px rgba(0, 0, 0, 0.7); }
 .app-frame {
   max-width: var(--page-max);
   margin: 0 auto;
@@ -1119,10 +1178,20 @@ section { scroll-margin-top: 70px; }
 }
 .code-cta:hover { background: #34322e; gap: 12px; }
 
-/* The lecture stage — from code/src/styles.css */
+/* The lecture stage — from code/src/styles.css, running in Hyzr Code's
+   dark theme (tokens from source) like a video player against the paper */
 .stage {
+  --paper-surface: #232326;
+  --paper-border: #383836;
+  --paper-border-soft: #2e2e2c;
+  --paper-text: #f5f4ef;
+  --paper-muted: #a8a49c;
+  --paper-faint: #7d7a72;
+  --ochre: #20b8cd;
+  --ochre-soft: rgba(32, 184, 205, 0.14);
+  --ochre-line: rgba(32, 184, 205, 0.4);
   position: relative;
-  background: var(--paper-surface);
+  background: #1b1b1d;
   border: 1px solid var(--paper-border-soft);
   border-radius: 14px;
   min-height: 420px;
@@ -1130,7 +1199,8 @@ section { scroll-margin-top: 70px; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(40, 38, 30, 0.08), 0 1px 2px rgba(40, 38, 30, 0.05);
+  color: var(--paper-text);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 .stage-section {
   position: absolute;
@@ -1181,7 +1251,7 @@ section { scroll-margin-top: 70px; }
   padding: 18px 22px;
   border: 1px solid var(--paper-border);
   border-radius: 10px;
-  background: #f6f5ef;
+  background: #1d1d1c;
   font-family: var(--font-mono);
   font-size: 12.5px;
   line-height: 1.7;
@@ -1197,7 +1267,7 @@ section { scroll-margin-top: 70px; }
 }
 .stage-code .ln.lit { background: var(--ochre-soft); }
 .stage-code .kw { color: var(--ochre); font-style: normal; }
-.stage-code .num { color: #3b6fb5; font-style: normal; }
+.stage-code .num { color: #7bacea; font-style: normal; }
 .stage-code .cm { color: var(--paper-faint); font-style: italic; }
 .stage-narration {
   display: flex;
@@ -1211,8 +1281,8 @@ section { scroll-margin-top: 70px; }
   flex: 0 0 auto;
   border: none;
   border-radius: 50%;
-  background: #1f1e1d;
-  color: #faf9f5;
+  background: #f5f4ef;
+  color: #1f1e1d;
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -1318,148 +1388,159 @@ section { scroll-margin-top: 70px; }
 .btn-ghost:hover { border-color: var(--text-faint); background: var(--bg); }
 
 /* ---------------------------------------------------------- footer
-   Dark ground uses the Hyzr Chat dark-theme tokens from source:
-   bg #0e0e10 · field #131315 · text #f4f4f2 · accent #20b8cd */
+   Structure mirrors the hyzr.ai studio footer: foot-top (brand +
+   subscribe | eyebrow columns), per-character masked wordmark with a
+   GSAP reveal, then the status bar. Dark ground = Hyzr Chat dark
+   tokens from source (#0e0e10 · #131315 · #f4f4f2 · #20b8cd). */
 .footer {
-  --fbg: #0e0e10;
+  --fbg: #0b0b0c;
   --ffield: #131315;
-  --fborder: rgba(255, 255, 255, 0.07);
-  --fborder-strong: rgba(255, 255, 255, 0.12);
+  --fborder: rgba(255, 255, 255, 0.08);
+  --fborder-strong: rgba(255, 255, 255, 0.13);
   --ftext: #f4f4f2;
   --fsoft: #a6a6a4;
   --ffaint: #6c6c6e;
   --faccent: #20b8cd;
   --faccent-ink: #6fe0ee;
   position: relative;
-  background: var(--fbg);
+  background: #0e0e10;
   color: var(--ftext);
   overflow: hidden;
 }
-.footer-inner {
-  position: relative;
-  z-index: 1;
-  max-width: var(--page-max);
+.foot-container {
+  max-width: calc(var(--page-max) + 48px);
   margin: 0 auto;
+  padding: 84px 24px 0;
+}
+.foot-top {
   display: grid;
-  grid-template-columns: 1.7fr 1fr 0.8fr 1fr;
-  gap: 40px;
-  padding: 72px 24px 40px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.5fr);
+  gap: 56px;
+  align-items: start;
 }
-.fb-mark { display: flex; align-items: center; gap: 11px; }
-.hyzr-mark.inverse { background: var(--ftext, #f4f4f2); color: #0e0e10; }
-.fb-name { font: 600 21px/1 var(--font-read); letter-spacing: -0.02em; }
-.fb-tag {
-  margin: 20px 0 26px;
+.foot-logo { display: flex; align-items: center; gap: 12px; }
+.hyzr-mark.inverse { background: var(--ftext, #f4f4f2); color: #0b0b0c; }
+.foot-logo-text { font: 600 21px/1 var(--font-sans); letter-spacing: -0.02em; }
+.foot-tag {
+  margin: 22px 0 30px;
   color: var(--fsoft);
-  font-size: 17px;
+  font-size: 19px;
   font-style: italic;
+  font-weight: 450;
   line-height: 1.5;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.004em;
 }
-.fb-subscribe {
+.foot-sub {
   display: flex;
   align-items: center;
   gap: 6px;
-  max-width: 380px;
+  max-width: 400px;
   padding: 6px;
   border: 1px solid var(--fborder-strong);
   border-radius: 999px;
   background: var(--ffield);
   transition: border-color 0.15s;
 }
-.fb-subscribe:focus-within { border-color: rgba(32, 184, 205, 0.4); }
-.fb-subscribe input {
+.foot-sub:focus-within { border-color: rgba(32, 184, 205, 0.4); }
+.foot-input {
   flex: 1;
   min-width: 0;
   border: none;
   outline: none;
   background: transparent;
-  padding: 8px 12px;
+  padding: 9px 14px;
   color: var(--ftext);
   font-family: var(--font-sans);
-  font-size: 13.5px;
+  font-size: 14px;
 }
-.fb-subscribe input::placeholder { color: var(--ffaint); }
-.fb-subscribe button {
+.foot-input::placeholder { color: var(--ffaint); }
+.foot-sub-btn {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   border: none;
   border-radius: 999px;
-  padding: 9px 16px;
+  padding: 10px 18px;
   background: var(--faccent);
   color: #06272c;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
   transition: background 0.15s, transform 0.12s;
 }
-.fb-subscribe button:hover { background: var(--faccent-ink); }
-.fb-subscribe button:active { transform: scale(0.97); }
-.footer-col { display: grid; gap: 12px; align-content: start; }
-.footer-col b {
-  margin-bottom: 6px;
+.foot-sub-btn:hover { background: var(--faccent-ink); }
+.foot-sub-btn:active { transform: scale(0.97); }
+.foot-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  padding-top: 6px;
+}
+.foot-col-title {
+  margin-bottom: 16px;
   color: var(--ffaint);
   font-family: var(--font-mono);
   font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
-.footer-col a {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  width: fit-content;
+.foot-col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.foot-col a {
   color: var(--fsoft);
-  font-size: 13.5px;
+  font-size: 14px;
   text-decoration: none;
   transition: color 0.13s;
 }
-.footer-col a:hover { color: var(--ftext); }
-.footer-col a em { color: var(--ffaint); font-style: normal; font-family: var(--font-mono); font-size: 10.5px; }
-.footer-col a svg { align-self: center; color: var(--ffaint); }
-.fb-dim { color: var(--ffaint); font-size: 13px; }
-.footer-giant {
-  margin: 40px 0 -0.13em;
-  font-size: clamp(76px, 17.5vw, 300px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 0.82;
-  text-align: center;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.13);
+.foot-col a:hover { color: var(--ftext); }
+.foot-dim { color: var(--ffaint); font-size: 13.5px; }
+
+.foot-wordmark {
+  display: flex;
+  justify-content: center;
+  margin: 76px 0 0;
   user-select: none;
   pointer-events: none;
   white-space: nowrap;
 }
-.footer-base {
-  position: relative;
-  z-index: 1;
+.fw-mask { display: inline-block; overflow: hidden; }
+.fw-char {
+  display: inline-block;
+  font-size: clamp(90px, 19.5vw, 335px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+}
+.foot-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  max-width: none;
-  margin: 0;
-  padding: 22px 32px 26px;
+  margin: 64px -24px 0;
+  padding: 24px 24px 28px;
   border-top: 1px solid var(--fborder);
   color: var(--ffaint);
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.fb-status { display: inline-flex; align-items: center; gap: 9px; }
-.fb-status i {
-  width: 8px;
-  height: 8px;
+.foot-bottom-r { display: inline-flex; align-items: center; gap: 11px; }
+.foot-pulse {
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: #43c98a;
-  animation: pulse-ok 2.4s ease-in-out infinite;
+  background: #8b7cf6;
+  box-shadow: 0 0 0 0 rgba(139, 124, 246, 0.35);
+  animation: pulse-op 2.2s ease-in-out infinite;
 }
-@keyframes pulse-ok { 50% { box-shadow: 0 0 0 5px rgba(67, 201, 138, 0.18); } }
+@keyframes pulse-op {
+  50% { box-shadow: 0 0 0 6px rgba(139, 124, 246, 0.15); }
+}
 
 /* ---------------------------------------------------------- responsive */
 @media (max-width: 960px) {
@@ -1468,7 +1549,8 @@ section { scroll-margin-top: 70px; }
   .way-row.flip .way-copy { order: 1; }
   .way-row.flip .way-visual { order: 2; }
   .strip-inner, .code-stats { grid-template-columns: repeat(2, 1fr); }
-  .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .foot-top { grid-template-columns: 1fr; gap: 44px; }
+  .route-stage { height: 260px; }
   .app-frame { grid-template-columns: 1fr; height: 520px; }
   .af-sidebar { display: none; }
 }
@@ -1480,7 +1562,12 @@ section { scroll-margin-top: 70px; }
   .pair-stack { grid-template-columns: 1fr; }
   .pair-phone { max-width: 220px; justify-self: center; }
   .pc-code b { width: 32px; height: 40px; font-size: 17px; }
-  .footer-inner { grid-template-columns: 1fr; gap: 26px; }
+  .foot-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .foot-sub { max-width: none; }
+  .foot-sub-btn { padding: 10px 14px; }
+  .route-stage { height: 220px; }
+  .route-hub { width: 62px; height: 62px; border-radius: 18px; }
+  .route-hub .hyzr-mark { --mark-size: 36px !important; }
   .picker-label { max-width: 90px; }
   .code-stats b { font-size: 26px; }
   .stage { padding: 52px 20px 16px; min-height: 380px; }

@@ -98,10 +98,72 @@
     window.addEventListener("pagehide", function () { window.clearInterval(typeTimer); });
   }
 
-  /* ---------------- icon marquee: duplicate the track for a seamless loop ---------------- */
-  var marqueeTrack = document.getElementById("marquee-track");
-  if (marqueeTrack) {
-    marqueeTrack.innerHTML += marqueeTrack.innerHTML;
+  /* ---------------- route band: tools fly into the Hyzr mark (GSAP) ---------------- */
+  var routeStage = document.getElementById("route-stage");
+  var routeFallback = document.getElementById("route-fallback");
+  var hasGsap = typeof window.gsap !== "undefined";
+  if (routeStage && hasGsap && !reducedMotion) {
+    window.gsap.registerPlugin(window.MotionPathPlugin);
+    var ROUTE_ICONS = ["claude", "openai-mark", "github", "vscode", "git", "typescript", "python", "react", "nodedotjs"];
+    var ROUTE_PATHS = ["#rp1", "#rp2", "#rp3", "#rp4"];
+    var routeHub = document.getElementById("route-hub");
+    var routeRing = routeStage.querySelector(".route-ring");
+    var routeIconIndex = 0;
+
+    var pulseHub = function () {
+      window.gsap.fromTo(routeHub, { scale: 1 }, { scale: 1.1, duration: 0.16, yoyo: true, repeat: 1, ease: "power2.out", overwrite: "auto",
+        onComplete: function () { window.gsap.set(routeHub, { scale: 1 }); } });
+      window.gsap.fromTo(routeRing, { opacity: 0.9, scale: 1 }, { opacity: 0, scale: 1.55, duration: 0.7, ease: "power2.out", overwrite: true });
+    };
+
+    var launchTile = function (pathSel) {
+      var name = ROUTE_ICONS[routeIconIndex++ % ROUTE_ICONS.length];
+      var tile = document.createElement("span");
+      tile.className = "tile route-tile";
+      tile.innerHTML = '<img src="assets/icons/' + name + '.svg" alt="" />';
+      routeStage.appendChild(tile);
+      var duration = 5.4 + Math.random() * 1.6;
+      var tl = window.gsap.timeline({
+        onComplete: function () {
+          tile.remove();
+          launchTile(pathSel);
+        }
+      });
+      tl.to(tile, { motionPath: { path: pathSel, align: pathSel, alignOrigin: [0.5, 0.5] }, duration: duration, ease: "power1.in" }, 0)
+        .fromTo(tile, { opacity: 0, scale: 0.5, rotation: -8 + Math.random() * 16 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.1, ease: "power2.out" }, 0)
+        .to(tile, { opacity: 0, scale: 0.25, duration: 0.55, ease: "power2.in" }, duration - 0.55)
+        .call(pulseHub, [], duration - 0.35);
+    };
+
+    var routeStarted = false;
+    var routeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !routeStarted) {
+          routeStarted = true;
+          ROUTE_PATHS.forEach(function (path, i) {
+            window.gsap.delayedCall(i * 1.4, function () { launchTile(path); });
+            window.gsap.delayedCall(i * 1.4 + 3.1, function () { launchTile(path); });
+          });
+          routeObserver.unobserve(routeStage);
+        }
+      });
+    }, { threshold: 0.3 });
+    routeObserver.observe(routeStage);
+  } else if (routeFallback) {
+    routeFallback.hidden = false;
+    var fallbackPaths = routeStage && routeStage.querySelector(".route-paths");
+    if (fallbackPaths) fallbackPaths.style.display = "none";
+    var fallbackHub = document.getElementById("route-hub");
+    if (fallbackHub) fallbackHub.style.display = "none";
+  }
+
+  /* ---------------- footer wordmark reveal (GSAP) ---------------- */
+  if (hasGsap && typeof window.ScrollTrigger !== "undefined" && !reducedMotion) {
+    window.gsap.registerPlugin(window.ScrollTrigger);
+    window.gsap.fromTo(".fw-char",
+      { yPercent: 108 },
+      { yPercent: 0, duration: 1, ease: "power3.out", stagger: 0.07,
+        scrollTrigger: { trigger: ".foot-wordmark", start: "top 94%", once: true } });
   }
 
   /* ---------------- footer subscribe ---------------- */

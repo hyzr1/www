@@ -102,27 +102,30 @@
       </div>
     </section>
 
-    <!-- ============================== STACK BAND ============================== -->
-    <section class="stack-band reveal">
-      <p class="stack-caption">Pairs with the tools you already use — and all of it answers to your voice.</p>
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-track" id="marquee-track">
-          <span class="tile"><img src="assets/icons/vscode.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/claude.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/openai-mark.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/github.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/git.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/typescript.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/react.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/python.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/nodedotjs.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/docker.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/supabase.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/vercel.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/figma.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/rust.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/go.svg" alt="" /></span>
-          <span class="tile"><img src="assets/icons/stripe.svg" alt="" /></span>
+    <!-- ============================== ROUTE BAND ============================== -->
+    <section class="route-band reveal">
+      <p class="stack-caption">Claude. Codex. GitHub. VS Code. Your whole toolchain routes through one place.</p>
+      <div class="route-stage" id="route-stage">
+        <svg class="route-paths" viewBox="0 0 1200 320" preserveAspectRatio="none" aria-hidden="true">
+          <path id="rp1" d="M -50 55 C 250 30, 430 95, 600 152" />
+          <path id="rp2" d="M -50 285 C 260 305, 430 225, 600 165" />
+          <path id="rp3" d="M 1250 65 C 950 35, 775 100, 602 152" />
+          <path id="rp4" d="M 1250 290 C 940 308, 772 228, 602 165" />
+        </svg>
+        <div class="route-hub" id="route-hub">
+          <span class="route-ring"></span>
+          <span class="hyzr-mark" style="--mark-size:46px">H</span>
+        </div>
+        <div class="route-fallback" id="route-fallback" hidden>
+          <span class="tile"><img src="assets/icons/claude.svg" alt="Claude" /></span>
+          <span class="tile"><img src="assets/icons/openai-mark.svg" alt="ChatGPT" /></span>
+          <span class="tile"><img src="assets/icons/github.svg" alt="GitHub" /></span>
+          <span class="tile"><img src="assets/icons/vscode.svg" alt="VS Code" /></span>
+          <span class="tile"><img src="assets/icons/git.svg" alt="Git" /></span>
+          <span class="tile"><img src="assets/icons/typescript.svg" alt="TypeScript" /></span>
+          <span class="tile"><img src="assets/icons/python.svg" alt="Python" /></span>
+          <span class="tile"><img src="assets/icons/react.svg" alt="React" /></span>
+          <span class="tile"><img src="assets/icons/nodedotjs.svg" alt="Node.js" /></span>
         </div>
       </div>
     </section>
@@ -355,48 +358,61 @@
 
   <!-- ============================== FOOTER ============================== -->
   <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="fb-mark">
-          <span class="hyzr-mark inverse" style="--mark-size:26px">H</span>
-          <span class="fb-name">HyzrAI</span>
+    <div class="foot-container">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <div class="foot-logo">
+            <span class="hyzr-mark inverse" style="--mark-size:28px">H</span>
+            <span class="foot-logo-text">HyzrAI</span>
+          </div>
+          <p class="foot-tag serif">A studio of software &amp; intelligence.<br />Built by one, sharpened in public.</p>
+          <form class="foot-sub" id="subscribe">
+            <input class="foot-input" type="email" name="email" placeholder="your@inbox.com" required aria-label="Email address" />
+            <button class="foot-sub-btn" type="submit">Subscribe
+              <svg viewBox="0 0 14 14" width="13" height="13" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
         </div>
-        <p class="fb-tag serif">A studio of software &amp; intelligence.<br />Built by one, sharpened in public.</p>
-        <form class="fb-subscribe" id="subscribe">
-          <input type="email" name="email" placeholder="your@inbox.com" required aria-label="Email address" />
-          <button type="submit">Subscribe
-            <svg viewBox="0 0 24 24" class="i" width="13" height="13"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </button>
-        </form>
+        <div class="foot-cols">
+          <div class="foot-col">
+            <div class="foot-col-title">Live today</div>
+            <ul>
+              <li><a href="https://chat.hyzr.ai">chat.hyzr.ai</a></li>
+              <li><a href="https://code.hyzr.ai">code.hyzr.ai</a></li>
+              <li><span class="foot-dim">More launching each season</span></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <div class="foot-col-title">Products</div>
+            <ul>
+              <li><a href="#chat">Hyzr Chat</a></li>
+              <li><a href="#pair">Pair</a></li>
+              <li><a href="#demo">How it works</a></li>
+              <li><a href="#code">Hyzr Code</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <div class="foot-col-title">Elsewhere</div>
+            <ul>
+              <li><a href="https://github.com/hyzr1" target="_blank" rel="noopener">GitHub / @hyzr1</a></li>
+              <li><a href="mailto:hyzrai@gmail.com">hyzrai@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="footer-col">
-        <b>Live today</b>
-        <a href="https://chat.hyzr.ai">Hyzr Chat <em>chat.hyzr.ai</em></a>
-        <a href="https://code.hyzr.ai">Hyzr Code <em>code.hyzr.ai</em></a>
-        <span class="fb-dim">More launching each season</span>
+      <div class="foot-wordmark" aria-hidden="true">
+        <span class="fw-mask"><span class="fw-char">H</span></span><span class="fw-mask"><span class="fw-char">y</span></span><span class="fw-mask"><span class="fw-char">z</span></span><span class="fw-mask"><span class="fw-char">r</span></span><span class="fw-mask"><span class="fw-char">A</span></span><span class="fw-mask"><span class="fw-char">I</span></span>
       </div>
-      <div class="footer-col">
-        <b>Product</b>
-        <a href="#chat">Ask</a>
-        <a href="#pair">Pair</a>
-        <a href="#demo">How it works</a>
-        <a href="#code">Learn to code</a>
+      <div class="foot-bottom">
+        <div class="foot-bottom-l">© 2026 HyzrAI. Software &amp; intelligence, built by one.</div>
+        <div class="foot-bottom-r"><span class="foot-pulse"></span>All systems operational</div>
       </div>
-      <div class="footer-col">
-        <b>Elsewhere</b>
-        <a href="https://github.com/hyzr1" target="_blank" rel="noopener">GitHub / @hyzr1
-          <svg viewBox="0 0 24 24" class="i" width="11" height="11"><path d="M7 17 17 7M9 7h8v8"/></svg>
-        </a>
-        <a href="mailto:hyzrai@gmail.com">hyzrai@gmail.com</a>
-      </div>
-    </div>
-    <div class="footer-giant" aria-hidden="true">HyzrAI</div>
-    <div class="footer-base">
-      <span>© 2026 HyzrAI. Software &amp; intelligence, built by one.</span>
-      <span class="fb-status"><i></i> All systems operational</span>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
