@@ -140,9 +140,11 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting && !routeStarted) {
           routeStarted = true;
+          /* dashes flow toward the hub along every path */
+          window.gsap.to(".route-paths path", { strokeDashoffset: -110, duration: 9, ease: "none", repeat: -1 });
           ROUTE_PATHS.forEach(function (path, i) {
-            window.gsap.delayedCall(i * 1.4, function () { launchTile(path); });
-            window.gsap.delayedCall(i * 1.4 + 3.1, function () { launchTile(path); });
+            window.gsap.delayedCall(i * 1.1, function () { launchTile(path); });
+            window.gsap.delayedCall(i * 1.1 + 2.6, function () { launchTile(path); });
           });
           routeObserver.unobserve(routeStage);
         }
@@ -157,13 +159,16 @@
     if (fallbackHub) fallbackHub.style.display = "none";
   }
 
-  /* ---------------- footer wordmark reveal (GSAP) ---------------- */
+  /* ---------------- footer wordmark reveal — same params as the studio site ---------------- */
   if (hasGsap && typeof window.ScrollTrigger !== "undefined" && !reducedMotion) {
     window.gsap.registerPlugin(window.ScrollTrigger);
-    window.gsap.fromTo(".fw-char",
-      { yPercent: 108 },
-      { yPercent: 0, duration: 1, ease: "power3.out", stagger: 0.07,
-        scrollTrigger: { trigger: ".foot-wordmark", start: "top 94%", once: true } });
+    window.gsap.from(".fw-char", {
+      yPercent: 110,
+      duration: 1.2,
+      stagger: 0.07,
+      ease: "expo.out",
+      scrollTrigger: { trigger: ".footer", start: "top 80%", once: true }
+    });
   }
 
   /* ---------------- footer subscribe ---------------- */
