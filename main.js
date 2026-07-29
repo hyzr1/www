@@ -98,41 +98,31 @@
     window.addEventListener("pagehide", function () { window.clearInterval(typeTimer); });
   }
 
-  /* ---------------- route band: tools fly into the Hyzr mark (GSAP) ---------------- */
+  /* ---------------- route band: tools in, verified software out (GSAP) ---------------- */
   var routeStage = document.getElementById("route-stage");
-  var routeFallback = document.getElementById("route-fallback");
   var hasGsap = typeof window.gsap !== "undefined";
-  if (routeStage && hasGsap && !reducedMotion) {
+  if (routeStage && hasGsap && !reducedMotion && typeof window.MotionPathPlugin !== "undefined") {
     window.gsap.registerPlugin(window.MotionPathPlugin);
-    var ROUTE_ICONS = ["claude", "openai-mark", "github", "vscode", "git", "typescript", "python", "react", "nodedotjs"];
-    var ROUTE_PATHS = ["#rp1", "#rp2", "#rp3", "#rp4"];
-    var routeHub = document.getElementById("route-hub");
+    var routeSvg = document.getElementById("route-lines");
+    var routeLines = Array.prototype.slice.call(routeStage.querySelectorAll(".rl"));
     var routeRing = routeStage.querySelector(".route-ring");
-    var routeIconIndex = 0;
 
-    var pulseHub = function () {
-      window.gsap.fromTo(routeHub, { scale: 1 }, { scale: 1.1, duration: 0.16, yoyo: true, repeat: 1, ease: "power2.out", overwrite: "auto",
-        onComplete: function () { window.gsap.set(routeHub, { scale: 1 }); } });
-      window.gsap.fromTo(routeRing, { opacity: 0.9, scale: 1 }, { opacity: 0, scale: 1.55, duration: 0.7, ease: "power2.out", overwrite: true });
-    };
-
-    var launchTile = function (pathSel) {
-      var name = ROUTE_ICONS[routeIconIndex++ % ROUTE_ICONS.length];
-      var tile = document.createElement("span");
-      tile.className = "tile route-tile";
-      tile.innerHTML = '<img src="assets/icons/' + name + '.svg" alt="" />';
-      routeStage.appendChild(tile);
-      var duration = 5.4 + Math.random() * 1.6;
-      var tl = window.gsap.timeline({
-        onComplete: function () {
-          tile.remove();
-          launchTile(pathSel);
-        }
+    var startPulses = function () {
+      routeLines.forEach(function (path, i) {
+        var isOut = path.classList.contains("out");
+        var pulse = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        pulse.setAttribute("r", "3.4");
+        pulse.setAttribute("class", "rl-pulse" + (isOut ? " out" : ""));
+        routeSvg.appendChild(pulse);
+        var duration = 2.1 + (i % 3) * 0.55;
+        var tl = window.gsap.timeline({ repeat: -1, delay: i * 0.5, repeatDelay: 0.9 });
+        tl.to(pulse, { motionPath: { path: "#" + path.id, align: "#" + path.id, alignOrigin: [0.5, 0.5] }, duration: duration, ease: "power1.inOut" }, 0)
+          .fromTo(pulse, { opacity: 0 }, { opacity: 1, duration: 0.35 }, 0)
+          .to(pulse, { opacity: 0, duration: 0.35 }, duration - 0.35);
       });
-      tl.to(tile, { motionPath: { path: pathSel, align: pathSel, alignOrigin: [0.5, 0.5] }, duration: duration, ease: "power1.in" }, 0)
-        .fromTo(tile, { opacity: 0, scale: 0.5, rotation: -8 + Math.random() * 16 }, { opacity: 1, scale: 1, rotation: 0, duration: 1.1, ease: "power2.out" }, 0)
-        .to(tile, { opacity: 0, scale: 0.25, duration: 0.55, ease: "power2.in" }, duration - 0.55)
-        .call(pulseHub, [], duration - 0.35);
+      window.gsap.fromTo(routeRing,
+        { opacity: 0.8, scale: 1 },
+        { opacity: 0, scale: 1.45, duration: 1.3, ease: "power2.out", repeat: -1, repeatDelay: 1.5 });
     };
 
     var routeStarted = false;
@@ -140,23 +130,24 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting && !routeStarted) {
           routeStarted = true;
-          /* dashes flow toward the hub along every path */
-          window.gsap.to(".route-paths path", { strokeDashoffset: -110, duration: 9, ease: "none", repeat: -1 });
-          ROUTE_PATHS.forEach(function (path, i) {
-            window.gsap.delayedCall(i * 1.1, function () { launchTile(path); });
-            window.gsap.delayedCall(i * 1.1 + 2.6, function () { launchTile(path); });
+          var remaining = routeLines.length;
+          routeLines.forEach(function (path, i) {
+            var length = path.getTotalLength();
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+            window.gsap.to(path, {
+              strokeDashoffset: 0,
+              duration: 1.1,
+              delay: i * 0.09,
+              ease: "power2.out",
+              onComplete: function () { if (--remaining === 0) startPulses(); }
+            });
           });
           routeObserver.unobserve(routeStage);
         }
       });
     }, { threshold: 0.3 });
     routeObserver.observe(routeStage);
-  } else if (routeFallback) {
-    routeFallback.hidden = false;
-    var fallbackPaths = routeStage && routeStage.querySelector(".route-paths");
-    if (fallbackPaths) fallbackPaths.style.display = "none";
-    var fallbackHub = document.getElementById("route-hub");
-    if (fallbackHub) fallbackHub.style.display = "none";
   }
 
   /* ---------------- footer wordmark reveal — same params as the studio site ---------------- */
@@ -184,176 +175,114 @@
     });
   }
 
-  /* ---------------- icons for the demo ---------------- */
-  function icon(kind, size) {
-    var paths = {
-      route: '<circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1"/>',
-      code: '<path d="M8 6 3 12l5 6M16 6l5 6-5 6"/>',
-      file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>',
-      terminal: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9l3 3-3 3M13 15h4"/>',
-      shield: '<path d="M12 3l7 3v5c0 4.4-2.9 8.2-7 10-4.1-1.8-7-5.6-7-10V6l7-3Z"/>',
-      eye: '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/>',
-      check: '<path d="M20 6 9 17l-5-5"/>',
-      sparkles: '<path d="M12 3.2l1.7 4.6 4.6 1.7-4.6 1.7L12 15.8l-1.7-4.6L5.7 9.5l4.6-1.7z"/>'
-    };
-    return '<svg viewBox="0 0 24 24" class="i" width="' + size + '" height="' + size + '">' + paths[kind] + "</svg>";
-  }
-
-  /* ---------------- product demo replay ---------------- */
+  /* ---------------- product demo replay: GSAP timeline over real markup ---------------- */
   var thread = document.getElementById("af-thread");
   var frame = document.getElementById("app-frame");
   var runBadge = document.getElementById("af-run");
   var taskCount = document.getElementById("af-taskcount");
-  var afTitle = document.getElementById("af-title");
 
-  var SUBTASKS = [
-    { label: "Layout, tokens, and responsive grid", tier: "standard" },
-    { label: "Monthly / annual toggle + comparison table", tier: "standard" },
-    { label: "Accessibility and visual verification", tier: "hard" }
-  ];
-  var STEPS = [
-    { kind: "route", label: "Routing 3 tasks by capability — 2 models selected" },
-    { kind: "file", label: "Reading project structure and design tokens" },
-    { kind: "code", label: "Editing pricing.tsx — comparison table, 4 plans" },
-    { kind: "code", label: "Editing theme.css — dark mode via prefers-color-scheme" },
-    { kind: "terminal", label: "Running type checks and unit tests" },
-    { kind: "eye", label: "Capturing desktop and mobile screenshots" },
-    { kind: "shield", label: "Verifying acceptance criteria independently" }
-  ];
-  var EVIDENCE = ["Type check", "14 unit tests", "Contrast AA", "2 screenshots"];
+  if (frame && thread) {
+    var demoSteps = Array.prototype.slice.call(thread.querySelectorAll(".ds"));
+    var subStatuses = Array.prototype.slice.call(thread.querySelectorAll(".as-status"));
+    var apProgress = document.getElementById("ap-progress");
+    var apCostbar = document.getElementById("ap-costbar");
+    var apTime = document.getElementById("ap-time");
+    var apTokens = document.getElementById("ap-tokens");
+    var apBudget = document.getElementById("ap-budget");
+    var apCost = document.getElementById("ap-cost");
+    var apTasks = document.getElementById("ap-tasks");
+    var CHECK_SVG = '<svg viewBox="0 0 24 24" class="i" width="12" height="12" style="--sw:2.2"><path d="M20 6 9 17l-5-5"/></svg>';
 
-  function el(html) {
-    var div = document.createElement("div");
-    div.innerHTML = html.trim();
-    return div.firstChild;
-  }
-  function scrollThread() {
-    thread.scrollTo({ top: thread.scrollHeight, behavior: reducedMotion ? "auto" : "smooth" });
-  }
-
-  var demoTimers = [];
-  function after(ms, fn) { demoTimers.push(window.setTimeout(fn, ms)); }
-
-  function runDemo() {
-    demoTimers.forEach(window.clearTimeout);
-    demoTimers = [];
-    thread.innerHTML = "";
-    runBadge.hidden = true;
-    taskCount.hidden = true;
-    afTitle.textContent = "New project";
-
-    var t = 600;
-
-    /* 1 — the request */
-    after(t, function () {
-      thread.appendChild(el('<div class="dm dm-user">Build a pricing page with a monthly/annual toggle, a plan comparison table, and dark mode.</div>'));
-      afTitle.textContent = "Pricing page with comparison table";
-      scrollThread();
-    });
-
-    /* 2 — the plan */
-    t += 1100;
-    after(t, function () {
-      runBadge.hidden = false;
-      taskCount.hidden = false;
-      var plan = el(
-        '<div class="dm dm-plan"><div class="dm-plan-head">' + icon("route", 14) +
-        ' Planned 3 specialist tasks <em>routed by capability</em></div>' +
-        SUBTASKS.map(function (s, i) {
-          return '<div class="dm-sub" data-sub="' + i + '"><span class="st"><span class="spinner" hidden></span><span class="q">·</span></span>' +
-            s.label + '<span class="tier">' + s.tier + "</span></div>";
-        }).join("") + "</div>"
-      );
-      thread.appendChild(plan);
-      scrollThread();
-    });
-
-    /* 3 — subtasks light up while steps stream */
-    var stepsBox = null;
-    t += 900;
-    after(t, function () {
-      stepsBox = el('<div class="dm dm-steps"></div>');
-      thread.appendChild(stepsBox);
-    });
-
-    STEPS.forEach(function (step, i) {
-      t += i === 0 ? 200 : 1150;
-      after(t, function () {
-        if (!stepsBox) return;
-        var prev = stepsBox.querySelector(".dm-step.active");
-        if (prev) prev.classList.remove("active");
-        stepsBox.appendChild(el('<div class="dm-step active">' + icon(step.kind, 13) + step.label + "</div>"));
-        var subIndex = i < 2 ? 0 : i < 4 ? 1 : 2;
-        for (var s = 0; s <= subIndex; s++) {
-          var row = thread.querySelector('[data-sub="' + s + '"]');
-          if (!row) continue;
-          var active = s === subIndex && i < STEPS.length - 1;
-          row.querySelector(".spinner").hidden = !active;
-          row.querySelector(".q").hidden = true;
-          if (!active && !row.classList.contains("done")) {
-            row.classList.add("done");
-            row.querySelector(".st").innerHTML = icon("check", 13);
-          }
-        }
-        scrollThread();
+    var setStatusDone = function (el) {
+      el.classList.add("done");
+      el.innerHTML = CHECK_SVG + " " + el.getAttribute("data-done");
+    };
+    var resetStatuses = function () {
+      subStatuses.forEach(function (el) {
+        el.classList.remove("done");
+        el.innerHTML = '<span class="spinner"></span>';
       });
-    });
+      apTasks.textContent = "0/3";
+    };
+    var showFinalState = function () {
+      demoSteps.forEach(function (el) { el.style.opacity = "1"; });
+      subStatuses.forEach(setStatusDone);
+      apProgress.style.width = "68%";
+      apCostbar.style.width = "68%";
+      apTime.textContent = "11m 45s";
+      apTokens.textContent = "611,480";
+      apBudget.textContent = "68%";
+      apCost.textContent = "$4.067";
+      apTasks.textContent = "3/3";
+    };
 
-    /* 4 — the delivery */
-    t += 1400;
-    after(t, function () {
-      var last = thread.querySelector('[data-sub="2"]');
-      if (last && !last.classList.contains("done")) {
-        last.classList.add("done");
-        last.querySelector(".st").innerHTML = icon("check", 13);
-      }
-      var active = thread.querySelector(".dm-step.active");
-      if (active) active.classList.remove("active");
-      runBadge.hidden = true;
-      var answer = el(
-        '<div class="dm dm-answer"><p>Done. The pricing page is live in this project’s workspace with four plans, an annual discount toggle, and full dark-mode support. Every acceptance criterion passed independent verification.</p>' +
-        '<div class="dm-evidence">' + EVIDENCE.map(function (e) {
-          return '<span class="dm-chip">' + icon("check", 11) + e + "</span>";
-        }).join("") + "</div>" +
-        '<div class="dm-usage">4 model calls · 2 zero-model operations · 41% under token budget</div></div>'
-      );
-      thread.appendChild(answer);
-      scrollThread();
-    });
+    if (hasGsap && !reducedMotion) {
+      var counters = { seconds: 0, tokens: 0, budget: 0, cost: 0 };
+      var renderCounters = function () {
+        var m = Math.floor(counters.seconds / 60);
+        var s = Math.floor(counters.seconds % 60);
+        apTime.textContent = m + "m " + (s < 10 ? "0" : "") + s + "s";
+        apTokens.textContent = Math.round(counters.tokens).toLocaleString("en-US");
+        apBudget.textContent = Math.round(counters.budget) + "%";
+        apCost.textContent = "$" + counters.cost.toFixed(3);
+      };
+      var scrollDemo = function () {
+        thread.scrollTo({ top: thread.scrollHeight, behavior: "smooth" });
+      };
 
-    /* loop */
-    t += 7000;
-    after(t, runDemo);
-  }
+      window.gsap.set(demoSteps, { autoAlpha: 0, y: 14 });
 
-  if (frame) {
-    if (reducedMotion) {
-      /* Render the finished state once, no animation. */
-      runDemo = null;
-      thread.innerHTML = "";
-      thread.appendChild(el('<div class="dm dm-user">Build a pricing page with a monthly/annual toggle, a plan comparison table, and dark mode.</div>'));
-      var plan = '<div class="dm dm-plan"><div class="dm-plan-head">' + icon("route", 14) + ' Planned 3 specialist tasks <em>routed by capability</em></div>' +
-        SUBTASKS.map(function (s) {
-          return '<div class="dm-sub done"><span class="st">' + icon("check", 13) + "</span>" + s.label + '<span class="tier">' + s.tier + "</span></div>";
-        }).join("") + "</div>";
-      thread.appendChild(el(plan));
-      thread.appendChild(el(
-        '<div class="dm dm-answer"><p>Done. The pricing page is live in this project’s workspace with four plans, an annual discount toggle, and full dark-mode support.</p>' +
-        '<div class="dm-evidence">' + EVIDENCE.map(function (e) { return '<span class="dm-chip">' + icon("check", 11) + e + "</span>"; }).join("") + "</div></div>"
-      ));
-      afTitle.textContent = "Pricing page with comparison table";
-    } else {
-      var started = false;
+      var tl = window.gsap.timeline({ paused: true, repeat: -1, repeatDelay: 7 });
+      var reveal = function (target, at) {
+        tl.fromTo(target, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out" }, at);
+        tl.call(scrollDemo, [], at + 0.15);
+      };
+
+      tl.call(function () {
+        resetStatuses();
+        runBadge.hidden = false;
+        taskCount.hidden = false;
+        thread.scrollTop = 0;
+      }, [], 0);
+
+      reveal(".afx-you", 0.15);
+      reveal(".afx-user", 0.3);
+      reveal(".afx-plan", 1.2);
+
+      tl.fromTo(counters, { seconds: 0, tokens: 0, budget: 0, cost: 0 },
+        { seconds: 705, tokens: 611480, budget: 68, cost: 4.067, duration: 10.5, ease: "power1.inOut", onUpdate: renderCounters }, 1.4);
+      tl.fromTo(apProgress, { width: "0%" }, { width: "68%", duration: 10.5, ease: "power1.inOut" }, 1.4);
+      tl.fromTo(apCostbar, { width: "0%" }, { width: "68%", duration: 10.5, ease: "power1.inOut" }, 1.4);
+
+      reveal(".afx-contract", 2.1);
+      reveal(".afx-objective", 2.7);
+
+      var subs = thread.querySelectorAll(".afx-sub");
+      reveal(subs[0], 3.4);
+      reveal(subs[1], 4.0);
+      reveal(subs[2], 4.6);
+
+      tl.call(function () { setStatusDone(subStatuses[0]); apTasks.textContent = "1/3"; }, [], 6.2);
+      tl.call(function () { setStatusDone(subStatuses[1]); apTasks.textContent = "2/3"; }, [], 8.6);
+      tl.call(function () { setStatusDone(subStatuses[2]); apTasks.textContent = "3/3"; }, [], 11.2);
+
+      reveal(".afx-answer", 12.1);
+      tl.call(function () { runBadge.hidden = true; }, [], 12.4);
+      tl.to({}, { duration: 6 }, 12.5);
+
+      var demoStarted = false;
       var demoObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting && !started) {
-            started = true;
-            runDemo();
+          if (entry.isIntersecting && !demoStarted) {
+            demoStarted = true;
+            tl.play();
             demoObserver.unobserve(frame);
           }
         });
-      }, { threshold: 0.35 });
+      }, { threshold: 0.3 });
       demoObserver.observe(frame);
+    } else {
+      showFinalState();
     }
   }
 

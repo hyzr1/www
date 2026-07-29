@@ -99,30 +99,46 @@
       </div>
     </section>
 
-    <!-- ============================== ROUTE BAND ============================== -->
+    <!-- ============================== ROUTE BAND ==============================
+         Tools in, verified software out. Lines carry pulses into the hub
+         (teal) and out to delivered results (green). -->
     <section class="route-band reveal">
-      <p class="stack-caption">Claude. Codex. GitHub. VS Code. Your whole toolchain routes through one place.</p>
+      <p class="stack-caption">Your tools flow in. Verified software flows out.</p>
       <div class="route-stage" id="route-stage">
-        <svg class="route-paths" viewBox="0 0 1200 320" preserveAspectRatio="none" aria-hidden="true">
-          <path id="rp1" d="M -50 55 C 250 30, 430 95, 600 152" />
-          <path id="rp2" d="M -50 285 C 260 305, 430 225, 600 165" />
-          <path id="rp3" d="M 1250 65 C 950 35, 775 100, 602 152" />
-          <path id="rp4" d="M 1250 290 C 940 308, 772 228, 602 165" />
+        <svg class="route-lines" id="route-lines" viewBox="0 0 1100 400" preserveAspectRatio="none" aria-hidden="true">
+          <path class="rl" id="rl-in-1" d="M 92 70 C 280 70, 390 178, 500 195" />
+          <path class="rl" id="rl-in-2" d="M 92 200 C 250 200, 370 200, 500 200" />
+          <path class="rl" id="rl-in-3" d="M 92 330 C 280 330, 390 222, 500 205" />
+          <path class="rl" id="rl-in-4" d="M 222 135 C 340 142, 430 184, 500 197" />
+          <path class="rl" id="rl-in-5" d="M 222 265 C 340 258, 430 216, 500 203" />
+          <path class="rl out" id="rl-out-1" d="M 600 194 C 690 182, 730 90, 822 90" />
+          <path class="rl out" id="rl-out-2" d="M 600 200 C 680 200, 730 200, 822 200" />
+          <path class="rl out" id="rl-out-3" d="M 600 206 C 690 218, 730 310, 822 310" />
         </svg>
+
+        <div class="rt-tile" style="--x: 92; --y: 70; --d: 0s"><span class="tile"><img src="assets/icons/claude.svg" alt="Claude" /></span></div>
+        <div class="rt-tile" style="--x: 92; --y: 200; --d: -1.3s"><span class="tile"><img src="assets/icons/openai-mark.svg" alt="Codex" /></span></div>
+        <div class="rt-tile" style="--x: 92; --y: 330; --d: -2.6s"><span class="tile"><img src="assets/icons/git.svg" alt="Git" /></span></div>
+        <div class="rt-tile" style="--x: 222; --y: 135; --d: -1.9s"><span class="tile"><img src="assets/icons/github.svg" alt="GitHub" /></span></div>
+        <div class="rt-tile" style="--x: 222; --y: 265; --d: -0.6s"><span class="tile"><img src="assets/icons/vscode.svg" alt="VS Code" /></span></div>
+
         <div class="route-hub" id="route-hub">
           <span class="route-ring"></span>
           <span class="route-hub-h">H</span>
+          <span class="route-hub-label">Routes by capability</span>
         </div>
-        <div class="route-fallback" id="route-fallback" hidden>
-          <span class="tile"><img src="assets/icons/claude.svg" alt="Claude" /></span>
-          <span class="tile"><img src="assets/icons/openai-mark.svg" alt="ChatGPT" /></span>
-          <span class="tile"><img src="assets/icons/github.svg" alt="GitHub" /></span>
-          <span class="tile"><img src="assets/icons/vscode.svg" alt="VS Code" /></span>
-          <span class="tile"><img src="assets/icons/git.svg" alt="Git" /></span>
-          <span class="tile"><img src="assets/icons/typescript.svg" alt="TypeScript" /></span>
-          <span class="tile"><img src="assets/icons/python.svg" alt="Python" /></span>
-          <span class="tile"><img src="assets/icons/react.svg" alt="React" /></span>
-          <span class="tile"><img src="assets/icons/nodedotjs.svg" alt="Node.js" /></span>
+
+        <div class="rt-out" style="--x: 940; --y: 90">
+          <span class="rt-check"><svg viewBox="0 0 24 24" class="i" width="11" height="11"><path d="M20 6 9 17l-5-5" style="--sw:2.4"/></svg></span>
+          <div><b>PR #142 opened</b><em>All checks passed</em></div>
+        </div>
+        <div class="rt-out" style="--x: 940; --y: 200">
+          <span class="rt-check"><svg viewBox="0 0 24 24" class="i" width="11" height="11"><path d="M20 6 9 17l-5-5" style="--sw:2.4"/></svg></span>
+          <div><b>Preview deployed</b><em>Desktop &amp; mobile verified</em></div>
+        </div>
+        <div class="rt-out" style="--x: 940; --y: 310">
+          <span class="rt-check"><svg viewBox="0 0 24 24" class="i" width="11" height="11"><path d="M20 6 9 17l-5-5" style="--sw:2.4"/></svg></span>
+          <div><b>14 tests green</b><em>Evidence saved to Proof</em></div>
         </div>
       </div>
     </section>
@@ -152,21 +168,112 @@
             <div class="af-nav-btn"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9l3 3-3 3M13 15h4"/></svg> Work intake</div>
           </div>
           <div class="af-side-label">History</div>
+          <div class="af-search">
+            <svg viewBox="0 0 24 24" class="i" width="12" height="12"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            Search conversations
+          </div>
           <div class="af-hist">
-            <div class="af-hist-item active" id="af-hist-current">Pricing page with comparison table</div>
+            <div class="af-hist-item active" id="af-hist-current">Build an advanced weather app…</div>
             <div class="af-hist-item">Fix flaky checkout tests</div>
+            <div class="af-hist-item">Push my changes to a PR</div>
             <div class="af-hist-item">Realtime chat architecture</div>
           </div>
         </aside>
         <div class="af-main">
           <div class="af-topbar">
-            <strong id="af-title">New project</strong>
+            <strong id="af-title">Build an advanced weather app…</strong>
+            <span class="af-context">Project workspace</span>
             <div class="spacer"></div>
             <span class="af-run" id="af-run" hidden><span class="spinner"></span> Working</span>
+            <span class="af-preview"><svg viewBox="0 0 24 24" class="i" width="13" height="13"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg> Preview</span>
             <div class="af-toggle"><span class="on">Local</span><span>API</span></div>
           </div>
           <div class="af-thread" id="af-thread">
-            <!-- populated by the demo script -->
+            <div class="afx afx-you ds">You</div>
+            <div class="afx afx-user ds">Build an advanced weather app with amazing design, AI-generated background
+              images, a predictive formula for forecasting, dark and light theme, a weather API integration, then push
+              it to a private GitHub repo.</div>
+
+            <div class="afx afx-plan ds">
+              <div class="ap-head">
+                <svg viewBox="0 0 24 24" class="i" width="14" height="14"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1"/></svg>
+                Routing plan
+              </div>
+              <div class="ap-track"><span id="ap-progress"></span></div>
+              <div class="ap-stats">
+                <span><svg viewBox="0 0 24 24" class="i" width="12" height="12"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2.5"/></svg> <b id="ap-time">0m 00s</b></span>
+                <span><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 12.5 12 17.5 21 12.5"/></svg> <b id="ap-tasks">0/3</b> tasks</span>
+                <span><svg viewBox="0 0 24 24" class="i" width="12" height="12"><rect x="5" y="5" width="14" height="14" rx="2.5"/><path d="M9 2.5v2.5M15 2.5v2.5M9 19v2.5M15 19v2.5M2.5 9h2.5M2.5 15h2.5M19 9h2.5M19 15h2.5"/></svg> <b id="ap-tokens">0</b> tokens</span>
+                <span><b>3</b> model calls</span>
+                <span><b id="ap-budget">0%</b> of budget</span>
+              </div>
+              <div class="ap-cost"><span id="ap-costbar"></span><em><b id="ap-cost">$0.000</b> / $6.00 estimated cost</em></div>
+            </div>
+
+            <div class="afx afx-contract ds">
+              <svg viewBox="0 0 24 24" class="i" width="13" height="13"><path d="M12 3l7 3v5c0 4.4-2.9 8.2-7 10-4.1-1.8-7-5.6-7-10V6l7-3Z"/></svg>
+              Delivery contract
+              <em>5 checks · $6.00 cost ceiling</em>
+              <svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+
+            <div class="afx afx-objective ds">Build an advanced weather app with strong visual design, AI-generated
+              backgrounds, forecast prediction logic, dark and light themes, weather API integration, and publish it to
+              a private GitHub repo.</div>
+
+            <div class="afx afx-sub ds">
+              <span class="as-icon"><img src="assets/icons/openai-mark.svg" alt="" /></span>
+              <div class="as-body">
+                <b>Planner · GPT-5.4 Mini</b>
+                <span>Classifies workload, tools, modality, and priorities</span>
+              </div>
+              <em class="as-status" data-done="analyzed"><span class="spinner"></span></em>
+            </div>
+            <div class="afx afx-sub ds">
+              <span class="as-icon"><img src="assets/icons/claude.svg" alt="" /></span>
+              <div class="as-body">
+                <b>Design the app experience</b>
+                <span><i class="as-chip">Frontend &amp; visual design</i><i class="as-chip dim">cost default</i> Claude Fable 5 · Claude Max</span>
+              </div>
+              <em class="as-status" data-done="done"><span class="spinner"></span></em>
+            </div>
+            <div class="afx afx-sub ds">
+              <span class="as-icon"><img src="assets/icons/openai-mark.svg" alt="" /></span>
+              <div class="as-body">
+                <b>Forecast engine + weather API</b>
+                <span><i class="as-chip">Engineering</i><i class="as-chip dim">verified twice</i> GPT-5.4 Codex</span>
+              </div>
+              <em class="as-status" data-done="verified"><span class="spinner"></span></em>
+            </div>
+
+            <div class="afx afx-answer ds">
+              <p>Created and wired two AI-generated responsive weather backgrounds:</p>
+              <ul>
+                <li><a>weather-clear.png</a></li>
+                <li><a>weather-storm.png</a></li>
+              </ul>
+              <p>Updated <a>app.js</a> to select the clear/storm asset by condition, retaining gradient fallbacks.
+                Open-Meteo requests use safe query construction, current-hour matching is DST/timezone-safe, and the
+                pressure-trend prediction logic stays integrated.</p>
+              <p>Validation: <code>node --check app.js</code> passed. Pushed to a private repo with dark and light
+                themes verified in both viewports.</p>
+              <blockquote>All 5 acceptance checks passed — evidence saved to Proof.</blockquote>
+              <div class="afx-actions">
+                <span><svg viewBox="0 0 24 24" class="i" width="12" height="12"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg> Copy</span>
+                <span><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/></svg> Regenerate</span>
+              </div>
+            </div>
+          </div>
+          <div class="af-composer">
+            <span class="afc-placeholder">Ask anything — Hyzr Chat routes it to the right model</span>
+            <div class="afc-row">
+              <span class="afc-round"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><path d="M12 5v14M5 12h14"/></svg></span>
+              <span class="afc-plan"><svg viewBox="0 0 24 24" class="i" width="13" height="13"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1"/></svg> Plan</span>
+              <span class="spacer"></span>
+              <span class="afc-model"><svg viewBox="0 0 24 24" class="i" width="13" height="13"><path d="M12 3.2l1.7 4.6 4.6 1.7-4.6 1.7L12 15.8l-1.7-4.6L5.7 9.5l4.6-1.7z"/></svg> Auto · High <svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M6 9l6 6 6-6"/></svg></span>
+              <span class="afc-round"><svg viewBox="0 0 24 24" class="i" width="13" height="13"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+              <span class="afc-send"><svg viewBox="0 0 24 24" class="i" width="14" height="14" style="--sw:2"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span>
+            </div>
           </div>
         </div>
       </div>
