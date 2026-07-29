@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hyzr — What are you building?</title>
+  <meta name="description" content="Hyzr Chat turns one request into planned, routed, verified software. Hyzr Code teaches programming with narrated visual lectures. Built by Hyzr." />
+  <meta property="og:title" content="Hyzr" />
+  <meta property="og:description" content="One request in. Verified software out. Hyzr Chat and Hyzr Code." />
+  <meta property="og:url" content="https://hyzr.ai" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400..600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================== NAV ============================== -->
+  <header class="nav" id="top">
+    <a class="nav-brand" href="#top" aria-label="Hyzr home">
+      <span class="hyzr-mark" style="--mark-size:26px">H</span>
+      <span class="nav-word">Hyzr</span>
+    </a>
+    <nav class="nav-links" aria-label="Products">
+      <a href="#chat">Chat</a>
+      <a href="#pair">Pair</a>
+      <a href="#code">Code</a>
+      <a href="https://github.com/hyzr1" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <a class="nav-cta" href="https://chat.hyzr.ai">Open Hyzr Chat</a>
+  </header>
+
+  <!-- ============================== HERO ============================== -->
+  <main>
+    <section class="hero" id="chat">
+      <div class="hero-inner">
+        <a class="hero-eyebrow" href="#pair">
+          <span class="dot"></span> New — pair your local environment and build from your phone
+          <svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <span class="home-mark"><span class="hyzr-mark" style="--mark-size:22px">H</span></span>
+        <h1 class="hero-title">What are you building?</h1>
+        <p class="hero-sub">Hyzr Chat plans the work, routes each task to the right model, and builds inside an isolated
+          workspace — then verifies the result before you see it.</p>
+
+        <!-- The real Hyzr Chat composer, from source. Typing here continues at chat.hyzr.ai -->
+        <form class="composer" id="composer" action="https://chat.hyzr.ai/" method="get">
+          <textarea id="prompt" name="q" rows="1" spellcheck="false"
+            placeholder="Ask anything — Hyzr Chat routes it to the right model"></textarea>
+          <div class="composer-row">
+            <button type="button" class="round-btn" title="Attach" aria-label="Attach">
+              <svg viewBox="0 0 24 24" class="i" width="17" height="17"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <button type="button" class="tool-btn active" title="Analyze the workload and assign the best specialist models">
+              <svg viewBox="0 0 24 24" class="i" width="15" height="15"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h1"/></svg>
+              Plan
+            </button>
+            <div class="spacer"></div>
+            <button type="button" class="tool-btn" aria-label="Model: Auto, effort High">
+              <svg viewBox="0 0 24 24" class="i" width="15" height="15"><path d="M12 3.2l1.7 4.6 4.6 1.7-4.6 1.7L12 15.8l-1.7-4.6L5.7 9.5l4.6-1.7z"/><path d="M18.5 15l.8 2.1 2.2.8-2.2.8-.8 2.1-.8-2.1-2.2-.8 2.2-.8z" opacity="0.7"/></svg>
+              <span class="picker-label">Auto · High</span>
+              <svg viewBox="0 0 24 24" class="i chev" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <button type="button" class="round-btn" title="Voice input" aria-label="Voice input">
+              <svg viewBox="0 0 24 24" class="i" width="16" height="16"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+            </button>
+            <button type="submit" class="send" id="send" disabled aria-label="Send">
+              <svg viewBox="0 0 24 24" class="i" width="17" height="17" style="--sw:2"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="suggestions">
+          <button class="suggestion" data-prompt="Build a polished, responsive project dashboard with a strong visual system and realistic content.">
+            <svg viewBox="0 0 24 24" class="i" width="15" height="15"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 12.5 12 17.5 21 12.5"/><path d="M3 16.5 12 21.5 21 16.5" opacity="0.5"/></svg>
+            Build an interface
+          </button>
+          <button class="suggestion" data-prompt="Inspect this project, identify the most important reliability and quality issues, then fix and verify them.">
+            <svg viewBox="0 0 24 24" class="i" width="15" height="15"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9l3 3-3 3M13 15h4"/></svg>
+            Debug a project
+          </button>
+          <button class="suggestion" data-prompt="Design the architecture for a scalable multi-tenant realtime chat backend. Cover the data model, message fan-out, and how to avoid race conditions.">
+            <svg viewBox="0 0 24 24" class="i" width="15" height="15"><path d="M12 3.2l1.7 4.6 4.6 1.7-4.6 1.7L12 15.8l-1.7-4.6L5.7 9.5l4.6-1.7z"/><path d="M18.5 15l.8 2.1 2.2.8-2.2.8-.8 2.1-.8-2.1-2.2-.8 2.2-.8z" opacity="0.7"/></svg>
+            Plan an architecture
+          </button>
+        </div>
+
+        <p class="hero-note">This is the real interface. Press Enter and continue at <b>chat.hyzr.ai</b>.</p>
+      </div>
+    </section>
+
+    <!-- ============================== FACT STRIP ============================== -->
+    <section class="strip reveal">
+      <div class="strip-inner">
+        <div class="strip-item"><b>Capability routing</b><span>each task matched to the model that fits it</span></div>
+        <div class="strip-item"><b>Durable runs</b><span>work survives closed tabs and sleeping phones</span></div>
+        <div class="strip-item"><b>Isolated workspaces</b><span>every project gets its own filesystem and repo</span></div>
+        <div class="strip-item"><b>Independent verification</b><span>checks, tests, and screenshots as evidence</span></div>
+      </div>
+    </section>
+
+    <!-- ============================== DEMO ============================== -->
+    <section class="demo reveal" id="demo">
+      <div class="section-head">
+        <span class="kicker">Hyzr Chat</span>
+        <h2>One request. A planned, verified delivery.</h2>
+        <p>Broad prompts become specialist tasks with acceptance criteria. Watch a delivery run in the actual interface.</p>
+      </div>
+
+      <!-- A faithful miniature of the product: sidebar + topbar + thread -->
+      <div class="app-frame" id="app-frame" aria-label="Hyzr Chat product demo">
+        <aside class="af-sidebar">
+          <div class="af-brand">
+            <span class="hyzr-mark" style="--mark-size:20px">H</span>
+            <span class="af-word"><b>Hyzr</b><em>Chat</em></span>
+          </div>
+          <div class="af-new">
+            <svg viewBox="0 0 24 24" class="i" width="14" height="14"><path d="M12 5v14M5 12h14"/></svg> New
+          </div>
+          <div class="af-nav">
+            <div class="af-nav-btn active"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><path d="M12 3.2l1.7 4.6 4.6 1.7-4.6 1.7L12 15.8l-1.7-4.6L5.7 9.5l4.6-1.7z"/></svg> Chat</div>
+            <div class="af-nav-btn"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2.5"/></svg> Tasks <span class="af-count" id="af-taskcount" hidden>1</span></div>
+            <div class="af-nav-btn"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><path d="M12 3l7 3v5c0 4.4-2.9 8.2-7 10-4.1-1.8-7-5.6-7-10V6l7-3Z"/></svg> Proof</div>
+            <div class="af-nav-btn"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 12.5 12 17.5 21 12.5"/></svg> Projects</div>
+            <div class="af-nav-btn"><svg viewBox="0 0 24 24" class="i" width="14" height="14"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9l3 3-3 3M13 15h4"/></svg> Work intake</div>
+          </div>
+          <div class="af-side-label">History</div>
+          <div class="af-hist">
+            <div class="af-hist-item active" id="af-hist-current">Pricing page with comparison table</div>
+            <div class="af-hist-item">Fix flaky checkout tests</div>
+            <div class="af-hist-item">Realtime chat architecture</div>
+          </div>
+        </aside>
+        <div class="af-main">
+          <div class="af-topbar">
+            <strong id="af-title">New project</strong>
+            <div class="spacer"></div>
+            <span class="af-run" id="af-run" hidden><span class="spinner"></span> Working</span>
+            <div class="af-toggle"><span class="on">Local</span><span>API</span></div>
+          </div>
+          <div class="af-thread" id="af-thread">
+            <!-- populated by the demo script -->
+          </div>
+        </div>
+      </div>
+      <p class="demo-caption">A scripted replay of a real Hyzr Chat run — plan, route, build, verify.</p>
+    </section>
+
+    <!-- ============================== TWO WAYS ============================== -->
+    <section class="ways reveal" id="pair">
+      <div class="section-head">
+        <span class="kicker">Two ways to run</span>
+        <h2>Start like a search engine.<br />Scale to your whole environment.</h2>
+      </div>
+      <div class="ways-grid">
+        <div class="way-card">
+          <div class="way-head">
+            <span class="way-icon"><svg viewBox="0 0 24 24" class="i" width="18" height="18"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>
+            <h3>Ask</h3>
+            <span class="way-tag">No setup</span>
+          </div>
+          <p>Open <a href="https://chat.hyzr.ai">chat.hyzr.ai</a> and ask. Fast answers, deep research, and planning —
+            with every request routed to the model that fits it best.</p>
+          <ul class="way-list">
+            <li>Ask anything, instantly — nothing to install</li>
+            <li>Automatic model choice, or pick one yourself</li>
+            <li>Conversations sync across your devices</li>
+          </ul>
+        </div>
+        <div class="way-card featured">
+          <div class="way-head">
+            <span class="way-icon"><svg viewBox="0 0 24 24" class="i" width="18" height="18"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
+            <h3>Pair</h3>
+            <span class="way-tag accent">Full power</span>
+          </div>
+          <p>Download the app and pair your local environment — or bring your own API keys. Every project gets an
+            isolated filesystem and a GitHub repo, and you can drive it all from your phone.</p>
+          <ul class="way-list">
+            <li>Uses your authenticated Claude and Codex CLI sessions</li>
+            <li>Or connect directly with your own API keys</li>
+            <li>Own filesystem, Git branches, and browser preview per project</li>
+            <li>Start work from your phone; it keeps running when the screen sleeps</li>
+          </ul>
+          <div class="pair-visual">
+            <div class="pair-terminal">
+              <div class="pt-bar"><i></i><i></i><i></i><span>hyzr — pair</span></div>
+              <pre><span class="pt-prompt">$</span> hyzr pair
+<span class="pt-dim">Scanning local environment…</span>
+<span class="pt-ok">✓</span> claude CLI <span class="pt-dim">authenticated</span>
+<span class="pt-ok">✓</span> codex CLI <span class="pt-dim">authenticated</span>
+<span class="pt-ok">✓</span> git · node 24
+Pairing code  <b class="pt-code">7F4-K2Q</b></pre>
+            </div>
+            <div class="pair-phone">
+              <div class="pp-notch"></div>
+              <div class="pp-head">
+                <span class="hyzr-mark" style="--mark-size:16px">H</span>
+                <span>Pricing page rebuild</span>
+              </div>
+              <div class="pp-task">
+                <div class="pp-task-top"><span class="spinner"></span> Running <em>12m</em></div>
+                <div class="pp-progress"><span id="pp-bar"></span></div>
+                <div class="pp-meta">4/6 steps · 2 models · verified twice</div>
+              </div>
+              <div class="pp-step"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2"/></svg> Type checks passed</div>
+              <div class="pp-step"><svg viewBox="0 0 24 24" class="i" width="12" height="12"><path d="M20 6 9 17l-5-5" style="--sw:2"/></svg> Mobile screenshot captured</div>
+              <div class="pp-step dim"><span class="spinner"></span> Verifying acceptance criteria…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== HYZR CODE ============================== -->
+    <section class="code-section reveal" id="code">
+      <div class="code-inner">
+        <div class="section-head left">
+          <span class="code-brand">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><path d="M3 5v14"/><path d="M9 8v11" opacity="0.82"/><path d="M15.5 11v8" opacity="0.62"/><path d="M22 14v5" opacity="0.42"/></svg>
+            <span class="code-word">Hyzr <em>Code</em></span>
+          </span>
+          <h2 class="serif">Learn to code from zero.<br />Watch it. Hear it. Run it.</h2>
+          <p>Narrated, animated lectures explain one idea at a time while the code lights up in sync. Then you write and
+            run real JavaScript and Python — right in the browser, even offline.</p>
+          <ul class="code-points">
+            <li><b>Animated video lectures</b> — synchronized narration with timed code cues</li>
+            <li><b>Run everything in the browser</b> — a sandboxed JS harness and Python via Pyodide</li>
+            <li><b>Remember what you learn</b> — retrieval checks and spaced scheduling</li>
+            <li><b>Interview-ready</b> — algorithm drills from fundamentals to FAANG-style prep</li>
+          </ul>
+          <a class="code-cta" href="https://code.hyzr.ai">Start learning
+            <svg viewBox="0 0 24 24" class="i" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <!-- The real lecture stage, from source: paper ground, mono labels, serif display -->
+        <div class="stage" id="stage" aria-label="Hyzr Code lecture demo">
+          <div class="stage-section">FUNCTIONS · CLOSURES</div>
+          <div class="stage-focus">JS · LECTURE 12</div>
+          <div class="stage-body" id="stage-body">
+            <h3 class="stage-title serif" id="stage-title">A function remembers where it was born.</h3>
+            <div class="stage-code" id="stage-code" hidden>
+<pre><code><span class="ln" data-l="1"><i class="kw">function</i> counter() {</span>
+<span class="ln" data-l="2">  <i class="kw">let</i> n = <i class="num">0</i>;</span>
+<span class="ln cue" data-l="3">  <i class="kw">return</i> () => ++n;</span>
+<span class="ln" data-l="4">}</span>
+<span class="ln" data-l="5"></span>
+<span class="ln" data-l="6"><i class="kw">const</i> next = counter();</span>
+<span class="ln cue2" data-l="7">next(); <i class="cm">// 1 — n is still alive</i></span></code></pre>
+            </div>
+          </div>
+          <div class="stage-narration">
+            <button class="stage-play" id="stage-play" aria-label="Play lecture">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" stroke="none"><path d="M8 5.5v13l11-6.5z"/></svg>
+            </button>
+            <div class="stage-wave" id="stage-wave">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <span class="stage-time" id="stage-time">0:00</span>
+          </div>
+          <div class="scene-rail" id="scene-rail">
+            <i class="pip on"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-stats">
+        <div><b>145</b><span>narrated lectures</span></div>
+        <div><b>2,122</b><span>animated scenes</span></div>
+        <div><b>281</b><span>executable problems</span></div>
+        <div><b>100%</b><span>runs offline</span></div>
+      </div>
+    </section>
+
+    <!-- ============================== CLOSER ============================== -->
+    <section class="closer reveal">
+      <span class="hyzr-mark" style="--mark-size:44px">H</span>
+      <h2>Describe the outcome.<br />Hyzr does the work.</h2>
+      <div class="closer-actions">
+        <a class="btn-primary" href="https://chat.hyzr.ai">Open Hyzr Chat</a>
+        <a class="btn-ghost" href="https://code.hyzr.ai">Learn with Hyzr Code</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="fb-mark">
+          <span class="hyzr-mark inverse" style="--mark-size:26px">H</span>
+          <span class="fb-name">Hyzr</span>
+        </div>
+        <p class="fb-tag serif">A studio of software &amp; intelligence.<br />Built by one, sharpened in public.</p>
+        <form class="fb-subscribe" id="subscribe">
+          <input type="email" name="email" placeholder="your@inbox.com" required aria-label="Email address" />
+          <button type="submit">Subscribe
+            <svg viewBox="0 0 24 24" class="i" width="13" height="13"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </button>
+        </form>
+      </div>
+      <div class="footer-col">
+        <b>Live today</b>
+        <a href="https://chat.hyzr.ai">Hyzr Chat <em>chat.hyzr.ai</em></a>
+        <a href="https://code.hyzr.ai">Hyzr Code <em>code.hyzr.ai</em></a>
+        <span class="fb-dim">More launching each season</span>
+      </div>
+      <div class="footer-col">
+        <b>Product</b>
+        <a href="#chat">Ask</a>
+        <a href="#pair">Pair</a>
+        <a href="#demo">How it works</a>
+        <a href="#code">Learn to code</a>
+      </div>
+      <div class="footer-col">
+        <b>Elsewhere</b>
+        <a href="https://github.com/hyzr1" target="_blank" rel="noopener">GitHub / @hyzr1
+          <svg viewBox="0 0 24 24" class="i" width="11" height="11"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="mailto:hyzrai@gmail.com">hyzrai@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-giant" aria-hidden="true">Hyzr</div>
+    <div class="footer-base">
+      <span>© 2026 Hyzr. Software &amp; intelligence, built by one.</span>
+      <span class="fb-status"><i></i> All systems operational</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
