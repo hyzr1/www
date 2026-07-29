@@ -1480,10 +1480,10 @@ section { scroll-margin-top: 70px; }
 .foot-logo { display: flex; align-items: center; gap: 12px; }
 .hyzr-mark.inverse { background: var(--f-bg, #f6f4ee); color: #0a0a09; }
 .foot-logo-text {
-  font-family: var(--f-sans);
+  font-family: var(--font-sans);
   font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 620;
+  letter-spacing: -0.035em;
   color: var(--f-bg);
 }
 .foot-tag {
@@ -1564,11 +1564,11 @@ section { scroll-margin-top: 70px; }
   display: flex;
   justify-content: center;
   margin: 60px 0 28px;
-  font-family: var(--f-sans);
-  font-weight: 800;
+  font-family: var(--font-sans);
+  font-weight: 620;
   font-size: clamp(120px, 26vw, 380px);
   line-height: 0.85;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.05em;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.18);
   user-select: none;
