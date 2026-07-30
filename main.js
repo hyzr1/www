@@ -98,26 +98,10 @@
     window.addEventListener("pagehide", function () { window.clearInterval(typeTimer); });
   }
 
-  /* ---------------- icon ribbon: slides along its diagonal, scrubbed to scroll ---------------- */
+  /* ---------------- gsap plugin registration ---------------- */
   var hasGsap = typeof window.gsap !== "undefined";
   var hasST = typeof window.ScrollTrigger !== "undefined";
   if (hasGsap && hasST) window.gsap.registerPlugin(window.ScrollTrigger);
-
-  var ribbonTrack = document.getElementById("ribbon-track");
-  if (ribbonTrack && hasGsap && hasST && !reducedMotion) {
-    window.gsap.fromTo(ribbonTrack,
-      { x: 80 },
-      {
-        x: -960,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".ribbon-band",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.6
-        }
-      });
-  }
 
   /* ---------------- two ways: sticky index synced to the scrolling panels ---------------- */
   var waysPanels = Array.prototype.slice.call(document.querySelectorAll(".ways-panel"));

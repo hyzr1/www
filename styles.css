@@ -470,52 +470,6 @@ section { scroll-margin-top: 70px; }
   .hero-eyebrow .dot, .spinner { animation: none; }
 }
 
-/* ---------------------------------------------------------- icon ribbon
-   Slanted ribbon of tool tiles; the track slides along its own diagonal,
-   scrubbed to scroll. */
-.ribbon-band { position: relative; padding: 96px 0 84px; overflow: hidden; }
-.stack-caption {
-  margin: 0 24px 64px;
-  color: var(--text-faint);
-  font-size: 13px;
-  text-align: center;
-}
-.ribbon-tilt { transform: rotate(-11deg); }
-.ribbon-track {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  width: max-content;
-  padding: 44px 0;
-  will-change: transform;
-}
-.rb {
-  width: 80px;
-  height: 80px;
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  background: var(--panel);
-  box-shadow: 0 2px 4px rgba(20, 20, 18, 0.04), 0 26px 50px -22px rgba(20, 20, 18, 0.3);
-  transform: rotate(var(--r, 0deg)) translateY(var(--ty, 0px));
-}
-.rb img { width: 38px; height: 38px; object-fit: contain; }
-.rb.sm { width: 64px; height: 64px; border-radius: 18px; }
-.rb.sm img { width: 30px; height: 30px; }
-.rb.lg { width: 94px; height: 94px; border-radius: 26px; }
-.rb.lg img { width: 45px; height: 45px; }
-@media (max-width: 640px) {
-  .ribbon-band { padding: 64px 0 56px; }
-  .stack-caption { margin-bottom: 36px; }
-  .ribbon-track { gap: 20px; padding: 30px 0; }
-  .rb { width: 62px; height: 62px; border-radius: 17px; }
-  .rb img { width: 29px; height: 29px; }
-  .rb.lg { width: 72px; height: 72px; }
-  .rb.sm { width: 52px; height: 52px; }
-}
-
 /* ---------------------------------------------------------- demo: app frame
    This whole band runs in Hyzr Chat's dark theme — the product's actual
    default — using the tokens from chat/app/globals.css verbatim. */
